@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package com.appjishu.fpush.core.proto;
+
+option java_package = "com.appjishu.fpush.core.proto";
+option java_multiple_files = true;
+option java_outer_classname = "FMessageCollection";
+
+message FHeader {
+	int32 crcCode = 1;
+	int32 length = 2;		
+	int64 sessionId = 3;;
+	int32 type = 4; 	
+	int32 priority = 5;				
+}
+
+message FMessage {
+	FHeader header = 1;
+	string body = 2; 
+}
