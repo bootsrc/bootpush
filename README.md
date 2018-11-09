@@ -10,9 +10,8 @@ fpush是即时消息推送服务程序. <br/>
 3. protobuf-java 3.6.1 <br/>
 
 ## 运行
-eclipse/IDEA里
+eclipse/IDEA里 <br/>
 Step1 右键run as--java application-- FpushServer.java <br/>
-
 Step2 右键run as--java application-- FpushClient.java <br/>
 <br/>
 
