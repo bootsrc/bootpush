@@ -18,7 +18,7 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 
 public class FpushServer {
-	public static void main(String[] args) throws Exception {
+	public static void start() throws Exception {
 		//1 第一个线程组 是用于接收Client端连接的
 		EventLoopGroup bossGroup = new NioEventLoopGroup();
 		//2 第二个线程组 是用于实际的业务处理操作的

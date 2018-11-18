@@ -19,7 +19,7 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 
 public class FpushClient {
 
-	public static void main(String[] args) throws Exception {
+	public static void start() throws Exception {
 
 		EventLoopGroup workgroup = new NioEventLoopGroup();
 		Bootstrap b = new Bootstrap();
