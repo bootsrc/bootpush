@@ -39,7 +39,7 @@ public class FpushClient {
 		ChannelFuture cf1 = b.connect("127.0.0.1", 9910).sync();
 
 		// buf
-		cf1.channel().writeAndFlush(Unpooled.copiedBuffer("我是客户端信息:777".getBytes()));
+//		cf1.channel().writeAndFlush(Unpooled.copiedBuffer("我是客户端信息:777".getBytes()));
 
 		cf1.channel().closeFuture().sync();
 		workgroup.shutdownGracefully();
