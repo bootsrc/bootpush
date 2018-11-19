@@ -4,7 +4,13 @@ import java.io.Serializable;
 
 public class MsgUser implements Serializable {
 	private static final long serialVersionUID = 1L;
+	/**
+	 * 发送给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户单设备在线聊天的应用场景
+	 */
 	private String alias;
+	/**
+	 * 发送给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户多设备同时在线聊天的应用场景
+	 */
 	private String account;
 	public String getAlias() {
 		return alias;
