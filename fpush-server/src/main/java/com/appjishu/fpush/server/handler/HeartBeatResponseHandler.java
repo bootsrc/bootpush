@@ -18,11 +18,10 @@ public class HeartBeatResponseHandler extends ChannelInboundHandlerAdapter {
             if (message.getHeader() != null && message.getHeader().getType() == FMessageType.HEARTBEAT_REQ.value()) {
             	System.out.println("---Receive client heartbeat message : ---> " + message);
             	FHeader header = message.getHeader();
-            	if (!StringUtils.isEmpty(header.getAlias()) || !StringUtils.isEmpty(header.getAccount()) ) {
-            		FMessage heartBeat = buildHeartBeat(header.getAlias(), header.getAccount());
-                	System.out.println("---Send heartbeat response  message to client : ---> " + heartBeat);
-                	ctx.writeAndFlush(heartBeat);
-            	}	
+            	FMessage heartBeat = buildHeartBeat(header.getAlias(), header.getAccount());
+            	System.out.println("---Send heartbeat response  message to client : ---> " + heartBeat);
+            	ctx.writeAndFlush(heartBeat);	
+            	ctx.fireChannelRead(msg);
             }  else {
             	ctx.fireChannelRead(msg);
             }

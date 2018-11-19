@@ -3,6 +3,7 @@ package com.appjishu.fpush.client.app;
 import com.appjishu.fpush.client.constant.OneUser;
 import com.appjishu.fpush.client.handler.ClientHandler;
 import com.appjishu.fpush.client.handler.HeartBeatRequestHandler;
+import com.appjishu.fpush.client.handler.PushConfirmHandler;
 import com.appjishu.fpush.client.handler.RegisterRequestHandler;
 import com.appjishu.fpush.core.model.MsgUser;
 import com.appjishu.fpush.core.proto.FMessage;
@@ -41,6 +42,7 @@ public class FpushClient {
 				sc.pipeline().addLast(new ProtobufEncoder());
 				sc.pipeline().addLast(new RegisterRequestHandler(msgUser));
 				sc.pipeline().addLast(new HeartBeatRequestHandler(msgUser));
+				sc.pipeline().addLast(new PushConfirmHandler());
 			}
 		});
 

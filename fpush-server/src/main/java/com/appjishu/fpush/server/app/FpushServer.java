@@ -3,6 +3,7 @@ package com.appjishu.fpush.server.app;
 import com.appjishu.fpush.core.proto.FMessage;
 import com.appjishu.fpush.server.constant.ServerConstant;
 import com.appjishu.fpush.server.handler.HeartBeatResponseHandler;
+import com.appjishu.fpush.server.handler.PushHandler;
 import com.appjishu.fpush.server.handler.RegisterResponseHandler;
 import com.appjishu.fpush.server.handler.ServerHandler;
 
@@ -42,6 +43,7 @@ public class FpushServer {
 				sc.pipeline().addLast(new ProtobufEncoder());
 				sc.pipeline().addLast(new RegisterResponseHandler());
 				sc.pipeline().addLast(new HeartBeatResponseHandler());
+				sc.pipeline().addLast(new PushHandler());
 			}
 		})
 		 .option(ChannelOption.SO_BACKLOG, 100);

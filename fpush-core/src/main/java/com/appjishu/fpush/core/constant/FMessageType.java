@@ -9,7 +9,10 @@ public enum FMessageType {
 	REGISTER_RESP((byte) 0x4),
 	
 	HEARTBEAT_REQ((byte) 0x5),
-	HEARTBEAT_RESP((byte) 0x6)
+	HEARTBEAT_RESP((byte) 0x6),
+	
+	PUSH((byte) 0x7),
+	PUSH_CONFIRM((byte) 0x8)
 	;
 
     // 定义私有变量
