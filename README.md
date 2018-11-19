@@ -38,6 +38,6 @@ Step3 后台发送消息给fpush-client (用来模拟android，ios或者网页�
 server效果图<br/>
 ![](doc/server.png)
 <br/>
-client效果图<br/>
+client在eclipse上调试的效果图-eclipse console可以显示中文字符<br/>
 ![](doc/client.png)
 <br/>
