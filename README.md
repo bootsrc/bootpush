@@ -34,3 +34,10 @@ Step3 后台发送消息给fpush-client (用来模拟android，ios或者网页�
 </code></pre>
 
 <br/>
+
+server效果图<br/>
+![](doc/server.png)
+<br/>
+client效果图<br/>
+![](doc/client.png)
+<br/>
