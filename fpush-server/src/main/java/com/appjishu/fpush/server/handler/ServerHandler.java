@@ -15,7 +15,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 			FMessage fMessage = (FMessage) msg;
 			if (fMessage.getHeader() != null) {
 				FHeader fHeader = fMessage.getHeader();
-				System.out.println("---fHeader.getCrcCode:" + fHeader.getCrcCode());
+				System.out.println("---fHeader.getAlias:" + fHeader.getAlias());
 				System.out.println("---fHeader.getSessionId:" + fHeader.getSessionId());
 				System.out.println("---fHeader.getType:" + fHeader.getType());
 				System.out.println("---fHeader.getPriority:" + fHeader.getPriority());

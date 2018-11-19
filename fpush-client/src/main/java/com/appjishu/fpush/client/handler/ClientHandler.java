@@ -2,6 +2,7 @@ package com.appjishu.fpush.client.handler;
 
 import com.appjishu.fpush.core.app.FpushCoreApp;
 import com.appjishu.fpush.core.constant.FMessageType;
+import com.appjishu.fpush.core.proto.FBody;
 import com.appjishu.fpush.core.proto.FHeader;
 import com.appjishu.fpush.core.proto.FMessage;
 
@@ -20,13 +21,17 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 
 		FMessage.Builder builder = FMessage.newBuilder();
     	FHeader.Builder headerBuilder = FHeader.newBuilder();
-    	headerBuilder.setCrcCode(118);
+    	headerBuilder.setAlias("118");
     	headerBuilder.setType(FMessageType.LOGIN_REQ.value());
     	headerBuilder.setSessionId(1234);
-    	headerBuilder.setLength(6);
     	headerBuilder.setPriority(9);
     	builder.setHeader(headerBuilder.build());
-    	builder.setBody("这是对方发过来的一段中文字符111111");
+    	
+    	FBody.Builder fBodyBuilder = FBody.newBuilder();
+    	fBodyBuilder.setTitle("TestTitle");
+    	fBodyBuilder.setDescription("This is a Description");
+    	fBodyBuilder.setExtra("{\"k\":\"v\"}");
+    	builder.setBody(fBodyBuilder.build());
     	FMessage fMessage = builder.build();
     	
 		System.out.println("---Client_is-SendingAFMessageToServer--->");

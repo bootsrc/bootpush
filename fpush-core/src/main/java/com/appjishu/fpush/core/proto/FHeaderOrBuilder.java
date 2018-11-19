@@ -8,27 +8,67 @@ public interface FHeaderOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int32 crcCode = 1;</code>
-   */
-  int getCrcCode();
-
-  /**
-   * <code>int32 length = 2;</code>
-   */
-  int getLength();
-
-  /**
-   * <code>int64 sessionId = 3;</code>
+   * <code>int64 sessionId = 1;</code>
    */
   long getSessionId();
 
   /**
-   * <code>int32 type = 4;</code>
+   * <code>int32 type = 2;</code>
    */
   int getType();
 
   /**
-   * <code>int32 priority = 5;</code>
+   * <code>int32 priority = 3;</code>
    */
   int getPriority();
+
+  /**
+   * <code>string regId = 4;</code>
+   */
+  java.lang.String getRegId();
+  /**
+   * <code>string regId = 4;</code>
+   */
+  com.google.protobuf.ByteString
+      getRegIdBytes();
+
+  /**
+   * <code>string alias = 5;</code>
+   */
+  java.lang.String getAlias();
+  /**
+   * <code>string alias = 5;</code>
+   */
+  com.google.protobuf.ByteString
+      getAliasBytes();
+
+  /**
+   * <code>string account = 6;</code>
+   */
+  java.lang.String getAccount();
+  /**
+   * <code>string account = 6;</code>
+   */
+  com.google.protobuf.ByteString
+      getAccountBytes();
+
+  /**
+   * <code>string resultCode = 7;</code>
+   */
+  java.lang.String getResultCode();
+  /**
+   * <code>string resultCode = 7;</code>
+   */
+  com.google.protobuf.ByteString
+      getResultCodeBytes();
+
+  /**
+   * <code>string resultText = 8;</code>
+   */
+  java.lang.String getResultText();
+  /**
+   * <code>string resultText = 8;</code>
+   */
+  com.google.protobuf.ByteString
+      getResultTextBytes();
 }

@@ -7,14 +7,32 @@ option java_multiple_files = true;
 option java_outer_classname = "FMessageCollection";
 
 message FHeader {
-	int32 crcCode = 1;
-	int32 length = 2;		
-	int64 sessionId = 3;;
-	int32 type = 4; 	
-	int32 priority = 5;				
+	int64 sessionId = 1;
+	int32 type = 2; 	
+	int32 priority = 3;
+	string regId = 4;
+	string alias = 5;
+	string account = 6;	
+	string resultCode = 7;
+	string resultText = 8;	
+}
+
+message FBody {
+	string collapseKey = 1;
+    string payload = 2;
+    string title = 3;
+    string description = 4;
+    int32 notifyType = 5;
+    int64 timeToLive = 6;
+    int32 passThrough = 7;
+    int32 notifyId = 8;
+    string restrictedPackageNames = 9;
+    string extra = 10;
+    string apsProperFields = 11;
+    int64 timeToSend = 12;
 }
 
 message FMessage {
 	FHeader header = 1;
-	string body = 2; 
+	FBody body = 2; 
 }

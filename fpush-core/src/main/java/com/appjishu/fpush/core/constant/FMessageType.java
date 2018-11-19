@@ -1,10 +1,16 @@
 package com.appjishu.fpush.core.constant;
 
 public enum FMessageType {
-
     // 利用构造函数传参
-
-	LOGIN_REQ((byte)0x1), LOGIN_RESP((byte)0x2), HEARTBEAT_RESP((byte) 0x3), HEARTBEAT_REQ((byte) 0x4);
+	LOGIN_REQ((byte)0x1), 
+	LOGIN_RESP((byte)0x2), 
+	
+	REGISTER_REQ((byte) 0x3),
+	REGISTER_RESP((byte) 0x4),
+	
+	HEARTBEAT_REQ((byte) 0x5),
+	HEARTBEAT_RESP((byte) 0x6)
+	;
 
     // 定义私有变量
 

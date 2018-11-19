@@ -1,6 +1,10 @@
 package com.appjishu.fpush.client.app;
 
+import com.appjishu.fpush.client.constant.OneUser;
 import com.appjishu.fpush.client.handler.ClientHandler;
+import com.appjishu.fpush.client.handler.HeartBeatRequestHandler;
+import com.appjishu.fpush.client.handler.RegisterRequestHandler;
+import com.appjishu.fpush.core.model.MsgUser;
 import com.appjishu.fpush.core.proto.FMessage;
 
 import io.netty.bootstrap.Bootstrap;
@@ -20,6 +24,9 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 public class FpushClient {
 
 	public static void start() throws Exception {
+		MsgUser msgUser = new MsgUser();
+		msgUser.setAlias(OneUser.ALIAS);
+		msgUser.setAccount(OneUser.ACCOUNT);
 
 		EventLoopGroup workgroup = new NioEventLoopGroup();
 		Bootstrap b = new Bootstrap();
@@ -32,7 +39,8 @@ public class FpushClient {
 				sc.pipeline().addLast(new ProtobufDecoder(FMessage.getDefaultInstance()));
 				sc.pipeline().addLast(new ProtobufVarint32LengthFieldPrepender());
 				sc.pipeline().addLast(new ProtobufEncoder());
-				sc.pipeline().addLast(new ClientHandler());
+				sc.pipeline().addLast(new RegisterRequestHandler(msgUser));
+				sc.pipeline().addLast(new HeartBeatRequestHandler(msgUser));
 			}
 		});
 

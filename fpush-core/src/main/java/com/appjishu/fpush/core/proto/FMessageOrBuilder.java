@@ -21,12 +21,15 @@ public interface FMessageOrBuilder extends
   com.appjishu.fpush.core.proto.FHeaderOrBuilder getHeaderOrBuilder();
 
   /**
-   * <code>string body = 2;</code>
+   * <code>.com.appjishu.fpush.core.proto.FBody body = 2;</code>
    */
-  java.lang.String getBody();
+  boolean hasBody();
   /**
-   * <code>string body = 2;</code>
+   * <code>.com.appjishu.fpush.core.proto.FBody body = 2;</code>
    */
-  com.google.protobuf.ByteString
-      getBodyBytes();
+  com.appjishu.fpush.core.proto.FBody getBody();
+  /**
+   * <code>.com.appjishu.fpush.core.proto.FBody body = 2;</code>
+   */
+  com.appjishu.fpush.core.proto.FBodyOrBuilder getBodyOrBuilder();
 }

@@ -16,7 +16,6 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private FMessage() {
-    body_ = "";
   }
 
   @java.lang.Override
@@ -57,9 +56,16 @@ private static final long serialVersionUID = 0L;
             break;
           }
           case 18: {
-            java.lang.String s = input.readStringRequireUtf8();
+            com.appjishu.fpush.core.proto.FBody.Builder subBuilder = null;
+            if (body_ != null) {
+              subBuilder = body_.toBuilder();
+            }
+            body_ = input.readMessage(com.appjishu.fpush.core.proto.FBody.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(body_);
+              body_ = subBuilder.buildPartial();
+            }
 
-            body_ = s;
             break;
           }
           default: {
@@ -116,37 +122,24 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int BODY_FIELD_NUMBER = 2;
-  private volatile java.lang.Object body_;
+  private com.appjishu.fpush.core.proto.FBody body_;
   /**
-   * <code>string body = 2;</code>
+   * <code>.com.appjishu.fpush.core.proto.FBody body = 2;</code>
    */
-  public java.lang.String getBody() {
-    java.lang.Object ref = body_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      body_ = s;
-      return s;
-    }
+  public boolean hasBody() {
+    return body_ != null;
   }
   /**
-   * <code>string body = 2;</code>
+   * <code>.com.appjishu.fpush.core.proto.FBody body = 2;</code>
    */
-  public com.google.protobuf.ByteString
-      getBodyBytes() {
-    java.lang.Object ref = body_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      body_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public com.appjishu.fpush.core.proto.FBody getBody() {
+    return body_ == null ? com.appjishu.fpush.core.proto.FBody.getDefaultInstance() : body_;
+  }
+  /**
+   * <code>.com.appjishu.fpush.core.proto.FBody body = 2;</code>
+   */
+  public com.appjishu.fpush.core.proto.FBodyOrBuilder getBodyOrBuilder() {
+    return getBody();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -166,8 +159,8 @@ private static final long serialVersionUID = 0L;
     if (header_ != null) {
       output.writeMessage(1, getHeader());
     }
-    if (!getBodyBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, body_);
+    if (body_ != null) {
+      output.writeMessage(2, getBody());
     }
     unknownFields.writeTo(output);
   }
@@ -182,8 +175,9 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(1, getHeader());
     }
-    if (!getBodyBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, body_);
+    if (body_ != null) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(2, getBody());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -206,8 +200,11 @@ private static final long serialVersionUID = 0L;
       result = result && getHeader()
           .equals(other.getHeader());
     }
-    result = result && getBody()
-        .equals(other.getBody());
+    result = result && (hasBody() == other.hasBody());
+    if (hasBody()) {
+      result = result && getBody()
+          .equals(other.getBody());
+    }
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -223,8 +220,10 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + HEADER_FIELD_NUMBER;
       hash = (53 * hash) + getHeader().hashCode();
     }
-    hash = (37 * hash) + BODY_FIELD_NUMBER;
-    hash = (53 * hash) + getBody().hashCode();
+    if (hasBody()) {
+      hash = (37 * hash) + BODY_FIELD_NUMBER;
+      hash = (53 * hash) + getBody().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -364,8 +363,12 @@ private static final long serialVersionUID = 0L;
         header_ = null;
         headerBuilder_ = null;
       }
-      body_ = "";
-
+      if (bodyBuilder_ == null) {
+        body_ = null;
+      } else {
+        body_ = null;
+        bodyBuilder_ = null;
+      }
       return this;
     }
 
@@ -397,7 +400,11 @@ private static final long serialVersionUID = 0L;
       } else {
         result.header_ = headerBuilder_.build();
       }
-      result.body_ = body_;
+      if (bodyBuilder_ == null) {
+        result.body_ = body_;
+      } else {
+        result.body_ = bodyBuilder_.build();
+      }
       onBuilt();
       return result;
     }
@@ -449,9 +456,8 @@ private static final long serialVersionUID = 0L;
       if (other.hasHeader()) {
         mergeHeader(other.getHeader());
       }
-      if (!other.getBody().isEmpty()) {
-        body_ = other.body_;
-        onChanged();
+      if (other.hasBody()) {
+        mergeBody(other.getBody());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -599,73 +605,121 @@ private static final long serialVersionUID = 0L;
       return headerBuilder_;
     }
 
-    private java.lang.Object body_ = "";
+    private com.appjishu.fpush.core.proto.FBody body_ = null;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.appjishu.fpush.core.proto.FBody, com.appjishu.fpush.core.proto.FBody.Builder, com.appjishu.fpush.core.proto.FBodyOrBuilder> bodyBuilder_;
     /**
-     * <code>string body = 2;</code>
+     * <code>.com.appjishu.fpush.core.proto.FBody body = 2;</code>
      */
-    public java.lang.String getBody() {
-      java.lang.Object ref = body_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        body_ = s;
-        return s;
+    public boolean hasBody() {
+      return bodyBuilder_ != null || body_ != null;
+    }
+    /**
+     * <code>.com.appjishu.fpush.core.proto.FBody body = 2;</code>
+     */
+    public com.appjishu.fpush.core.proto.FBody getBody() {
+      if (bodyBuilder_ == null) {
+        return body_ == null ? com.appjishu.fpush.core.proto.FBody.getDefaultInstance() : body_;
       } else {
-        return (java.lang.String) ref;
+        return bodyBuilder_.getMessage();
       }
     }
     /**
-     * <code>string body = 2;</code>
+     * <code>.com.appjishu.fpush.core.proto.FBody body = 2;</code>
      */
-    public com.google.protobuf.ByteString
-        getBodyBytes() {
-      java.lang.Object ref = body_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        body_ = b;
-        return b;
+    public Builder setBody(com.appjishu.fpush.core.proto.FBody value) {
+      if (bodyBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        body_ = value;
+        onChanged();
       } else {
-        return (com.google.protobuf.ByteString) ref;
+        bodyBuilder_.setMessage(value);
       }
+
+      return this;
     }
     /**
-     * <code>string body = 2;</code>
+     * <code>.com.appjishu.fpush.core.proto.FBody body = 2;</code>
      */
     public Builder setBody(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      body_ = value;
-      onChanged();
+        com.appjishu.fpush.core.proto.FBody.Builder builderForValue) {
+      if (bodyBuilder_ == null) {
+        body_ = builderForValue.build();
+        onChanged();
+      } else {
+        bodyBuilder_.setMessage(builderForValue.build());
+      }
+
       return this;
     }
     /**
-     * <code>string body = 2;</code>
+     * <code>.com.appjishu.fpush.core.proto.FBody body = 2;</code>
+     */
+    public Builder mergeBody(com.appjishu.fpush.core.proto.FBody value) {
+      if (bodyBuilder_ == null) {
+        if (body_ != null) {
+          body_ =
+            com.appjishu.fpush.core.proto.FBody.newBuilder(body_).mergeFrom(value).buildPartial();
+        } else {
+          body_ = value;
+        }
+        onChanged();
+      } else {
+        bodyBuilder_.mergeFrom(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.com.appjishu.fpush.core.proto.FBody body = 2;</code>
      */
     public Builder clearBody() {
-      
-      body_ = getDefaultInstance().getBody();
-      onChanged();
+      if (bodyBuilder_ == null) {
+        body_ = null;
+        onChanged();
+      } else {
+        body_ = null;
+        bodyBuilder_ = null;
+      }
+
       return this;
     }
     /**
-     * <code>string body = 2;</code>
+     * <code>.com.appjishu.fpush.core.proto.FBody body = 2;</code>
      */
-    public Builder setBodyBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
+    public com.appjishu.fpush.core.proto.FBody.Builder getBodyBuilder() {
       
-      body_ = value;
       onChanged();
-      return this;
+      return getBodyFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.com.appjishu.fpush.core.proto.FBody body = 2;</code>
+     */
+    public com.appjishu.fpush.core.proto.FBodyOrBuilder getBodyOrBuilder() {
+      if (bodyBuilder_ != null) {
+        return bodyBuilder_.getMessageOrBuilder();
+      } else {
+        return body_ == null ?
+            com.appjishu.fpush.core.proto.FBody.getDefaultInstance() : body_;
+      }
+    }
+    /**
+     * <code>.com.appjishu.fpush.core.proto.FBody body = 2;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.appjishu.fpush.core.proto.FBody, com.appjishu.fpush.core.proto.FBody.Builder, com.appjishu.fpush.core.proto.FBodyOrBuilder> 
+        getBodyFieldBuilder() {
+      if (bodyBuilder_ == null) {
+        bodyBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.appjishu.fpush.core.proto.FBody, com.appjishu.fpush.core.proto.FBody.Builder, com.appjishu.fpush.core.proto.FBodyOrBuilder>(
+                getBody(),
+                getParentForChildren(),
+                isClean());
+        body_ = null;
+      }
+      return bodyBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

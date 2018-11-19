@@ -2,6 +2,8 @@ package com.appjishu.fpush.server.app;
 
 import com.appjishu.fpush.core.proto.FMessage;
 import com.appjishu.fpush.server.constant.ServerConstant;
+import com.appjishu.fpush.server.handler.HeartBeatResponseHandler;
+import com.appjishu.fpush.server.handler.RegisterResponseHandler;
 import com.appjishu.fpush.server.handler.ServerHandler;
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -38,7 +40,8 @@ public class FpushServer {
 				sc.pipeline().addLast(new ProtobufDecoder(FMessage.getDefaultInstance()));
 				sc.pipeline().addLast(new ProtobufVarint32LengthFieldPrepender());
 				sc.pipeline().addLast(new ProtobufEncoder());
-				sc.pipeline().addLast(new ServerHandler()); //ServerHandler为我们自定义的事件处理类
+				sc.pipeline().addLast(new RegisterResponseHandler());
+				sc.pipeline().addLast(new HeartBeatResponseHandler());
 			}
 		})
 		 .option(ChannelOption.SO_BACKLOG, 100);

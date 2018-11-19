@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 
+import com.appjishu.fpush.core.proto.FBody;
 import com.appjishu.fpush.core.proto.FHeader;
 import com.appjishu.fpush.core.proto.FMessage;
 
@@ -18,13 +19,17 @@ public class FpushCoreApp {
     public static FMessage newTestMessage() {
     	FMessage.Builder builder = FMessage.newBuilder();
     	FHeader.Builder headerBuilder = FHeader.newBuilder();
-    	headerBuilder.setCrcCode(118);
+    	headerBuilder.setAlias("11101");
     	headerBuilder.setType(5);
     	headerBuilder.setSessionId(1234);
-    	headerBuilder.setLength(6);
+    	headerBuilder.setAccount(null);
     	headerBuilder.setPriority(9);
     	builder.setHeader(headerBuilder.build());
-    	builder.setBody("这是对方发过来的一段中文字符111111");
+    	FBody.Builder fBodyBuilder = FBody.newBuilder();
+    	fBodyBuilder.setTitle("TestTitle");
+    	fBodyBuilder.setDescription("This is a Description");
+    	fBodyBuilder.setExtra("{\"k\":\"v\"}");
+    	builder.setBody(fBodyBuilder.build());
     	return builder.build();
     }
 
@@ -45,7 +50,8 @@ public class FpushCoreApp {
     	FMessage readObj = FMessage.parseFrom(new FileInputStream(path));
     	FHeader header = readObj.getHeader();
     	
-    	System.out.println("header.getCrcCode:" + header.getCrcCode());
+    	System.out.println("header.getAlias:" + header.getAlias());
+    	System.out.println("header.getAccount:" + header.getAccount());
     	System.out.println("header.getSessionId:" + header.getSessionId());
     	System.out.println("header.getType:" + header.getType());
     	System.out.println("header.getPriority:" + header.getPriority());
