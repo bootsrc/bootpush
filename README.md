@@ -41,3 +41,14 @@ server效果图<br/>
 client在eclipse上调试的效果图-eclipse console可以显示中文字符<br/>
 ![](doc/client.png)
 <br/>
+
+## 测试
+http://localhost:10200/app/registerAccount?mobilePhone=15600000000
+
+TODO list
+1. 需要在FHeader里增加msgId
+2. 客户端增加鉴权 (APP_ID + APP_KEY)  ,换取CLIENT_TOKEN;
+，服务器端也需要对应用服务器端的东西进行鉴权(APP_ID + APP_SECRET_KEY), 换取SERVER_TOKEN;
+
+3. 增加IdleStateHandler来对heartbeat进行监控，设定的时间间隔内没有收到心跳，就断开连接
+Netty的IdleStateHandler会根据用户的使用场景，启动三类定时任务，分别是：ReaderIdleTimeoutTask、WriterIdleTimeoutTask和AllIdleTimeoutTask，它们都会被加入到NioEventLoop的Task队列中被调度和执行。

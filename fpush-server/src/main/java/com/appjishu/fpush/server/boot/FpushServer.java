@@ -1,4 +1,4 @@
-package com.appjishu.fpush.server.app;
+package com.appjishu.fpush.server.boot;
 
 import com.appjishu.fpush.core.proto.FMessage;
 import com.appjishu.fpush.server.constant.ServerConstant;
