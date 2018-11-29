@@ -43,6 +43,8 @@ client在eclipse上调试的效果图-eclipse console可以显示中文字符<br
 <br/>
 
 ## 测试
+注册一个应用账号，手机号是15600000000
+<br/>
 http://localhost:10200/app/registerAccount?mobilePhone=15600000000
 
 TODO list
