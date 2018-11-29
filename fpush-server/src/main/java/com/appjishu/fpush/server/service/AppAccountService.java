@@ -69,4 +69,32 @@ public class AppAccountService {
 		}
 		return responseData;
 	}
+	
+	public ResponseData getSecretToken(long appId, String appSecretKey) {
+		ResponseData responseData = new ResponseData();
+		 AppAccount account = appAccountRepository.findBySecretKey(appId, appSecretKey);
+		 if (account == null) {
+			 responseData.setCode(1);
+			 responseData.setText("不存在这样的账号AppAccount");
+		 } else {
+			 responseData.setCode(0);
+			 responseData.setText("成功");
+			 responseData.setData(account.getSecretToken());
+		 }
+		 return responseData;	 
+	}
+	
+	public ResponseData getKeyToken(long appId, String appKey) {
+		ResponseData responseData = new ResponseData();
+		 AppAccount account = appAccountRepository.findByAppKey(appId, appKey);
+		 if (account == null) {
+			 responseData.setCode(1);
+			 responseData.setText("不存在这样的账号AppAccount");
+		 } else {
+			 responseData.setCode(0);
+			 responseData.setText("成功");
+			 responseData.setData(account.getKeyToken());
+		 }
+		 return responseData;	 
+	}
 }

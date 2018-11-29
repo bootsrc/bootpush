@@ -55,7 +55,41 @@ public class AppAccountRepository {
     	Map<String, Object> params = new HashMap<String, Object>();
      	params.put("mobilePhone", mobilePhone);
      	List<AppAccount> list = namedParameterJdbcTemplate.query(sql, 
-     			params, new BeanPropertyRowMapper<AppAccount>());
+     			params, new BeanPropertyRowMapper<>(AppAccount.class));
+     	
+     	if (list == null || list.size() == 0) {
+     		return null;
+     	} else {
+     		return list.get(0);
+     	}
+    }
+    
+    public AppAccount findBySecretKey(long appId, String appSecretKey) {
+    	String sql = "SELECT * FROM " + TABLE_NAME + " WHERE app_id=:appId"
+    			+ " AND app_secret_key=:appSecretKey ";
+    	
+    	Map<String, Object> params = new HashMap<String, Object>();
+     	params.put("appId", appId);
+     	params.put("appSecretKey", appSecretKey);
+     	List<AppAccount> list = namedParameterJdbcTemplate.query(sql, 
+     			params, new BeanPropertyRowMapper<>(AppAccount.class));
+     	
+     	if (list == null || list.size() == 0) {
+     		return null;
+     	} else {
+     		return list.get(0);
+     	}
+    }
+    
+    public AppAccount findByAppKey(long appId, String appKey) {
+    	String sql = "SELECT * FROM " + TABLE_NAME + " WHERE app_id=:appId"
+    			+ " AND app_key=:appKey ";
+    	
+    	Map<String, Object> params = new HashMap<String, Object>();
+     	params.put("appId", appId);
+     	params.put("appKey", appKey);
+     	List<AppAccount> list = namedParameterJdbcTemplate.query(sql, 
+     			params, new BeanPropertyRowMapper<>(AppAccount.class));
      	
      	if (list == null || list.size() == 0) {
      		return null;

@@ -32,4 +32,17 @@ public class AppController {
 //
 //		return "";
 //	}
+	
+	@RequestMapping("/secretToken")
+	public String getSecretToken(long appId, String appSecretKey) {
+		ResponseData responseData = appAccountService.getSecretToken(appId, appSecretKey);
+		return JSON.toJSONString(responseData);
+	}
+	
+	
+	@RequestMapping("/keyToken")
+	public String getKeyToken(long appId, String appKey) {
+		ResponseData responseData = appAccountService.getKeyToken(appId, appKey);
+		return JSON.toJSONString(responseData);
+	}
 }
