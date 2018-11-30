@@ -37,12 +37,12 @@ public class AppAccountService {
 		appAccount.setAppId(appId);
 		appAccount.setAppKey(appKey);
 		appAccount.setAppSecretKey(appSecretKey);
-		appAccount.setKeyToken(MD5Util.md5(appKey));
-		appAccount.setSecretToken(MD5Util.md5(appSecretKey));
+		appAccount.setClientToken(MD5Util.md5(appKey));
+		appAccount.setAppToken(MD5Util.md5(appSecretKey));
 		appAccount.setCreateTime(currentDate);
 		appAccount.setUpdateTime(currentDate);
-		appAccount.setKeyTokenExpire(expireDate);
-		appAccount.setSecretTokenExpire(expireDate);
+		appAccount.setClientTokenExpire(expireDate);
+		appAccount.setAppTokenExpire(expireDate);
 		appAccount.setMobilePhone(mobilePhone);
 		appAccountRepository.add(appAccount);
 		return appAccount;
@@ -79,7 +79,7 @@ public class AppAccountService {
 		 } else {
 			 responseData.setCode(0);
 			 responseData.setText("成功");
-			 responseData.setData(account.getSecretToken());
+			 responseData.setData(account.getAppToken());
 		 }
 		 return responseData;	 
 	}
@@ -93,7 +93,7 @@ public class AppAccountService {
 		 } else {
 			 responseData.setCode(0);
 			 responseData.setText("成功");
-			 responseData.setData(account.getKeyToken());
+			 responseData.setData(account.getClientToken());
 		 }
 		 return responseData;	 
 	}

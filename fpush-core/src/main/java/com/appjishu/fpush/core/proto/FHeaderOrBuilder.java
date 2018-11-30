@@ -71,4 +71,19 @@ public interface FHeaderOrBuilder extends
    */
   com.google.protobuf.ByteString
       getResultTextBytes();
+
+  /**
+   * <code>int64 appId = 9;</code>
+   */
+  long getAppId();
+
+  /**
+   * <code>string clientToken = 10;</code>
+   */
+  java.lang.String getClientToken();
+  /**
+   * <code>string clientToken = 10;</code>
+   */
+  com.google.protobuf.ByteString
+      getClientTokenBytes();
 }

@@ -15,6 +15,8 @@ message FHeader {
 	string account = 6;	
 	string resultCode = 7;
 	string resultText = 8;	
+	int64 appId = 9;
+	string clientToken = 10;
 }
 
 message FBody {
@@ -30,6 +32,7 @@ message FBody {
     string extra = 10;
     string apsProperFields = 11;
     int64 timeToSend = 12;
+    string msgId = 13;
 }
 
 message FMessage {

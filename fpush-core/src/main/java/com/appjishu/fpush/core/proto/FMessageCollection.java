@@ -39,21 +39,23 @@ public final class FMessageCollection {
   static {
     java.lang.String[] descriptorData = {
       "\n\016fmessage.proto\022\035com.appjishu.fpush.cor" +
-      "e.proto\"\223\001\n\007FHeader\022\021\n\tsessionId\030\001 \001(\003\022\014" +
+      "e.proto\"\267\001\n\007FHeader\022\021\n\tsessionId\030\001 \001(\003\022\014" +
       "\n\004type\030\002 \001(\005\022\020\n\010priority\030\003 \001(\005\022\r\n\005regId\030" +
       "\004 \001(\t\022\r\n\005alias\030\005 \001(\t\022\017\n\007account\030\006 \001(\t\022\022\n" +
-      "\nresultCode\030\007 \001(\t\022\022\n\nresultText\030\010 \001(\t\"\374\001" +
-      "\n\005FBody\022\023\n\013collapseKey\030\001 \001(\t\022\017\n\007payload\030" +
-      "\002 \001(\t\022\r\n\005title\030\003 \001(\t\022\023\n\013description\030\004 \001(" +
-      "\t\022\022\n\nnotifyType\030\005 \001(\005\022\022\n\ntimeToLive\030\006 \001(" +
-      "\003\022\023\n\013passThrough\030\007 \001(\005\022\020\n\010notifyId\030\010 \001(\005" +
-      "\022\036\n\026restrictedPackageNames\030\t \001(\t\022\r\n\005extr" +
-      "a\030\n \001(\t\022\027\n\017apsProperFields\030\013 \001(\t\022\022\n\ntime" +
-      "ToSend\030\014 \001(\003\"v\n\010FMessage\0226\n\006header\030\001 \001(\013" +
-      "2&.com.appjishu.fpush.core.proto.FHeader" +
-      "\0222\n\004body\030\002 \001(\0132$.com.appjishu.fpush.core" +
-      ".proto.FBodyB5\n\035com.appjishu.fpush.core." +
-      "protoB\022FMessageCollectionP\001b\006proto3"
+      "\nresultCode\030\007 \001(\t\022\022\n\nresultText\030\010 \001(\t\022\r\n" +
+      "\005appId\030\t \001(\003\022\023\n\013clientToken\030\n \001(\t\"\213\002\n\005FB" +
+      "ody\022\023\n\013collapseKey\030\001 \001(\t\022\017\n\007payload\030\002 \001(" +
+      "\t\022\r\n\005title\030\003 \001(\t\022\023\n\013description\030\004 \001(\t\022\022\n" +
+      "\nnotifyType\030\005 \001(\005\022\022\n\ntimeToLive\030\006 \001(\003\022\023\n" +
+      "\013passThrough\030\007 \001(\005\022\020\n\010notifyId\030\010 \001(\005\022\036\n\026" +
+      "restrictedPackageNames\030\t \001(\t\022\r\n\005extra\030\n " +
+      "\001(\t\022\027\n\017apsProperFields\030\013 \001(\t\022\022\n\ntimeToSe" +
+      "nd\030\014 \001(\003\022\r\n\005msgId\030\r \001(\t\"v\n\010FMessage\0226\n\006h" +
+      "eader\030\001 \001(\0132&.com.appjishu.fpush.core.pr" +
+      "oto.FHeader\0222\n\004body\030\002 \001(\0132$.com.appjishu" +
+      ".fpush.core.proto.FBodyB5\n\035com.appjishu." +
+      "fpush.core.protoB\022FMessageCollectionP\001b\006" +
+      "proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -72,13 +74,13 @@ public final class FMessageCollection {
     internal_static_com_appjishu_fpush_core_proto_FHeader_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_appjishu_fpush_core_proto_FHeader_descriptor,
-        new java.lang.String[] { "SessionId", "Type", "Priority", "RegId", "Alias", "Account", "ResultCode", "ResultText", });
+        new java.lang.String[] { "SessionId", "Type", "Priority", "RegId", "Alias", "Account", "ResultCode", "ResultText", "AppId", "ClientToken", });
     internal_static_com_appjishu_fpush_core_proto_FBody_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_appjishu_fpush_core_proto_FBody_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_appjishu_fpush_core_proto_FBody_descriptor,
-        new java.lang.String[] { "CollapseKey", "Payload", "Title", "Description", "NotifyType", "TimeToLive", "PassThrough", "NotifyId", "RestrictedPackageNames", "Extra", "ApsProperFields", "TimeToSend", });
+        new java.lang.String[] { "CollapseKey", "Payload", "Title", "Description", "NotifyType", "TimeToLive", "PassThrough", "NotifyId", "RestrictedPackageNames", "Extra", "ApsProperFields", "TimeToSend", "MsgId", });
     internal_static_com_appjishu_fpush_core_proto_FMessage_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_appjishu_fpush_core_proto_FMessage_fieldAccessorTable = new

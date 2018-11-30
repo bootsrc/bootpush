@@ -12,6 +12,9 @@ public class MsgUser implements Serializable {
 	 * 发送给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户多设备同时在线聊天的应用场景
 	 */
 	private String account;
+	private long appId;
+	private String appToken;
+	
 	public String getAlias() {
 		return alias;
 	}
@@ -23,5 +26,17 @@ public class MsgUser implements Serializable {
 	}
 	public void setAccount(String account) {
 		this.account = account;
-	}	
+	}
+	public long getAppId() {
+		return appId;
+	}
+	public void setAppId(long appId) {
+		this.appId = appId;
+	}
+	public String getAppToken() {
+		return appToken;
+	}
+	public void setAppToken(String appToken) {
+		this.appToken = appToken;
+	}
 }

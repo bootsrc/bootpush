@@ -47,10 +47,26 @@ client在eclipse上调试的效果图-eclipse console可以显示中文字符<br
 <br/>
 http://localhost:10200/app/registerAccount?mobilePhone=15600000000
 
-TODO list
-1. 需要在FHeader里增加msgId
-2. 客户端增加鉴权 (APP_ID + APP_KEY)  ,换取CLIENT_TOKEN;
-，服务器端也需要对应用服务器端的东西进行鉴权(APP_ID + APP_SECRET_KEY), 换取SERVER_TOKEN;
+http://localhost:10200/app/secretToken?appId=517723931931574272&appSecretKey=cb2eb85b362941f1b3e1
 
-3. 增加IdleStateHandler来对heartbeat进行监控，设定的时间间隔内没有收到心跳，就断开连接
+<br/>
+http://localhost:10200/app/keyToken?appId=517723931931574272&appKey=9f5d74bb0f68
+<br/>
+
+## Done List
+1. 客户端长连接的鉴权 <br/>
+客户端(即fpush-client)发送appId + appKey，经后台鉴定权限通过后，获取到clientToken <br/>
+fpush-client与fpush-server通信的时候, RegisterRequestHandler和HeartBeatRequestHandler里面需要带上<br/>
+appId+clientToken
+建立长连接后，最好所有的RequestHandler需要带上appId+clientToken <br/>
+
+2. 应用服务端的http连接的鉴权 <br/>
+应用服务端（即app server）发送appId + appSecretKey，经后台鉴定权限通过后，获取到appToken
+应用服务端每次调用fpush-server的api都需要带上appId+appToken
+<br/>
+
+## TODO list
+1. 需要在FHeader里增加msgId
+<br/>
+2. 增加IdleStateHandler来对heartbeat进行监控，设定的时间间隔内没有收到心跳，就断开连接
 Netty的IdleStateHandler会根据用户的使用场景，启动三类定时任务，分别是：ReaderIdleTimeoutTask、WriterIdleTimeoutTask和AllIdleTimeoutTask，它们都会被加入到NioEventLoop的Task队列中被调度和执行。

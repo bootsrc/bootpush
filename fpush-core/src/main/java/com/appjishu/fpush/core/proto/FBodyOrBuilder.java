@@ -101,4 +101,14 @@ public interface FBodyOrBuilder extends
    * <code>int64 timeToSend = 12;</code>
    */
   long getTimeToSend();
+
+  /**
+   * <code>string msgId = 13;</code>
+   */
+  java.lang.String getMsgId();
+  /**
+   * <code>string msgId = 13;</code>
+   */
+  com.google.protobuf.ByteString
+      getMsgIdBytes();
 }

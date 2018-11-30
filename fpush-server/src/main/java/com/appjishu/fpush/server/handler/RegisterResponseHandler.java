@@ -1,5 +1,6 @@
 package com.appjishu.fpush.server.handler;
 
+import com.appjishu.fpush.server.util.PassportUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -26,8 +27,7 @@ public class RegisterResponseHandler extends ChannelInboundHandlerAdapter {
 					&& ! StringUtils.isEmpty(header.getAlias())) {
 				String registeredAlias = header.getAlias();
 				log.info("---registeredAlias={}", registeredAlias);
-				FMessage targetMessage = buildRegisterResponse(registeredAlias, header.getAccount(), 
-						RegisterState.SUCCESS, "");
+				FMessage targetMessage = buildRegisterResponse(header);
 				ctx.writeAndFlush(targetMessage);
 			} else {
 				ctx.fireChannelRead(msg);
@@ -43,17 +43,23 @@ public class RegisterResponseHandler extends ChannelInboundHandlerAdapter {
         ctx.fireExceptionCaught(cause);
     }
 	
-	private FMessage buildRegisterResponse(String alias, String account, String resultCode, 
-			String resultText) {
+	private FMessage buildRegisterResponse(FHeader header) {
 		FMessage.Builder builder = FMessage.newBuilder();
-    	FHeader.Builder headerBuilder = FHeader.newBuilder();
-    	headerBuilder.setAlias(alias);
-    	headerBuilder.setAccount(account);
+
+    	FHeader.Builder headerBuilder = header.toBuilder();
     	headerBuilder.setType(FMessageType.REGISTER_RESP.value());
-    	headerBuilder.setSessionId(1234);
-    	headerBuilder.setPriority(9);
-    	headerBuilder.setResultCode(resultCode);
-    	headerBuilder.setResultText(resultText);
+		boolean passed = PassportUtil.checkByClientToken(header.getAppId(), header.getClientToken());
+
+    	if (passed){
+			headerBuilder.setResultCode(RegisterState.SUCCESS);
+			headerBuilder.setResultText("成功");
+			log.info("---Server:deviceRegisterSuccess.");
+		} else {
+			headerBuilder.setResultCode("001");
+			headerBuilder.setResultText("客户端设备注册失败");
+			log.info("---Server:deviceRegisterFailed.");
+		}
+
     	builder.setHeader(headerBuilder.build());
     	
     	FBody.Builder fBodyBuilder = FBody.newBuilder();
