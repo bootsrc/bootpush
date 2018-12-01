@@ -17,8 +17,8 @@ fpush-client 客户端，模拟App或者网页，或者桌面应用的客户端 
 
 ## 运行
 eclipse/IDEA里 <br/>
-Step1 右键run as--java application-- FpushServer.java <br/>
-Step2 右键run as--java application-- FpushClient.java <br/>
+Step1 右键run as--java application-- FpushServerApp.java <br/>
+Step2 右键run as--java application-- FpushClientApp.java <br/>
 
 Step3 后台发送消息给fpush-client (用来模拟android，ios或者网页，或者java应用的消息客户端)
 浏览器访问    <a href="http://localhost:10200">http://localhost:10200</a> <br/>
@@ -54,13 +54,24 @@ http://localhost:10200/app/keyToken?appId=517723931931574272&appKey=9f5d74bb0f68
 <br/>
 
 ## Done List
-1. 客户端长连接的鉴权 <br/>
+1. netty+protobuf <br/>
+protobuf的解码ProtobufVarint32FrameDecoder,ProtobufDecoder <br/>
+protobuf的编码ProtobufVarint32LengthFieldPrepender,ProtobufEncoder <br/><br/>
+
+2. 心跳机制的实现 <br/>
+client端经过HeartBeatResponseHandler新建线程，定期发出心跳请求<br/>
+server端的HeartBeatResponseHandler监听心跳并作出响应<br/>
+
+3. server端推送消息到client端 <br/>
+PushHandler和PushConfirmHandler <br/><br/>
+
+4. 客户端长连接的鉴权 <br/>
 客户端(即fpush-client)发送appId + appKey，经后台鉴定权限通过后，获取到clientToken <br/>
 fpush-client与fpush-server通信的时候, RegisterRequestHandler和HeartBeatRequestHandler里面需要带上<br/>
 appId+clientToken
 建立长连接后，最好所有的RequestHandler需要带上appId+clientToken <br/>
 
-2. 应用服务端的http连接的鉴权 <br/>
+5. 应用服务端的http连接的鉴权 <br/>
 应用服务端（即app server）发送appId + appSecretKey，经后台鉴定权限通过后，获取到appToken
 应用服务端每次调用fpush-server的api都需要带上appId+appToken
 <br/>
