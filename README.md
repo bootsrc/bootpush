@@ -99,8 +99,30 @@ String clientId = header.getAlias();
 
 
 ```java
-Channel channel = NettyChannelMap.get(alias);
-ChannelFuture future = channel.writeAndFlush(fMessage);
+public void doPush(List<MsgData> msgList, String alias) {
+        FMessage fMessage = buildPushMessage(msgList, alias);
+        if (fMessage != null) {
+            log.info("---TringToDoPush()--->");
+            Channel channel = NettyChannelMap.get(alias);
+            if (channel == null) {
+                log.info("------channelIsNull---");
+            } else if (!channel.isWritable()) {
+                log.info("------channelIsNotWritable---");
+            } else {
+                ChannelFuture future = channel.writeAndFlush(fMessage);
+                log.info("------msgWriten!!!---");
+                future.addListener(new ChannelFutureListener() {
+                    public void operationComplete(final ChannelFuture future)
+                            throws Exception {
+                        if (msgList.size() > 0) {
+                            msgList.remove(0);
+                            log.info("------removeAreadySentMsg!!!---");
+                        }
+                    }
+                });
+            }
+        }
+    }
 ```
 <br/>
 <br/>
