@@ -8,10 +8,7 @@ import com.appjishu.fpush.server.handler.RegisterResponseHandler;
 import com.appjishu.fpush.server.handler.ServerHandler;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -37,13 +34,14 @@ public class FpushServer {
 		 .childHandler(new ChannelInitializer<SocketChannel>() {
 			@Override
 			protected void initChannel(SocketChannel sc) throws Exception {
-				sc.pipeline().addLast(new ProtobufVarint32FrameDecoder());
-				sc.pipeline().addLast(new ProtobufDecoder(FMessage.getDefaultInstance()));
-				sc.pipeline().addLast(new ProtobufVarint32LengthFieldPrepender());
-				sc.pipeline().addLast(new ProtobufEncoder());
-				sc.pipeline().addLast(new RegisterResponseHandler());
-				sc.pipeline().addLast(new HeartBeatResponseHandler());
-				sc.pipeline().addLast(new PushHandler());
+				ChannelPipeline pipeline = sc.pipeline();
+				pipeline.addLast(new ProtobufVarint32FrameDecoder())
+				.addLast(new ProtobufDecoder(FMessage.getDefaultInstance()))
+				.addLast(new ProtobufVarint32LengthFieldPrepender())
+				.addLast(new ProtobufEncoder())
+				.addLast(new RegisterResponseHandler())
+				.addLast(new HeartBeatResponseHandler());
+//				pipeline.addLast(new PushHandler());
 			}
 		})
 		 .option(ChannelOption.SO_BACKLOG, 100);

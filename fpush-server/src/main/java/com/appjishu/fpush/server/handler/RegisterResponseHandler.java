@@ -1,5 +1,7 @@
 package com.appjishu.fpush.server.handler;
 
+import com.appjishu.fpush.server.channel.NettyChannelMap;
+import com.appjishu.fpush.server.constant.ChannelAttrKey;
 import com.appjishu.fpush.server.util.PassportUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +29,7 @@ public class RegisterResponseHandler extends ChannelInboundHandlerAdapter {
 					&& ! StringUtils.isEmpty(header.getAlias())) {
 				String registeredAlias = header.getAlias();
 				log.info("---registeredAlias={}", registeredAlias);
-				FMessage targetMessage = buildRegisterResponse(header);
+				FMessage targetMessage = buildRegisterResponse(header, ctx);
 				ctx.writeAndFlush(targetMessage);
 			} else {
 				ctx.fireChannelRead(msg);
@@ -43,7 +45,7 @@ public class RegisterResponseHandler extends ChannelInboundHandlerAdapter {
         ctx.fireExceptionCaught(cause);
     }
 	
-	private FMessage buildRegisterResponse(FHeader header) {
+	private FMessage buildRegisterResponse(FHeader header, ChannelHandlerContext ctx) {
 		FMessage.Builder builder = FMessage.newBuilder();
 
     	FHeader.Builder headerBuilder = header.toBuilder();
@@ -51,6 +53,9 @@ public class RegisterResponseHandler extends ChannelInboundHandlerAdapter {
 		boolean passed = PassportUtil.checkByClientToken(header.getAppId(), header.getClientToken());
 
     	if (passed){
+			String clientId = header.getAlias();
+			ctx.channel().attr(ChannelAttrKey.KEY_CLIENT_ID).set(clientId);
+			NettyChannelMap.put(clientId, ctx.channel());
 			headerBuilder.setResultCode(RegisterState.SUCCESS);
 			headerBuilder.setResultText("成功");
 			log.info("---Server:deviceRegisterSuccess.");

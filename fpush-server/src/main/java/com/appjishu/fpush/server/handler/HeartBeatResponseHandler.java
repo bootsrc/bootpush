@@ -1,5 +1,6 @@
 package com.appjishu.fpush.server.handler;
 
+import com.appjishu.fpush.server.channel.NettyChannelMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +29,7 @@ public class HeartBeatResponseHandler extends ChannelInboundHandlerAdapter {
             	} 
             	if (passed) {
         			FMessage heartBeat = buildHeartBeat(header);
+
         			log.info("---Send heartbeat response  message to client : ---> " + heartBeat);
                 	ctx.writeAndFlush(heartBeat);	
                 	ctx.fireChannelRead(msg);

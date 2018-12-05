@@ -63,7 +63,47 @@ client端经过HeartBeatResponseHandler新建线程，定期发出心跳请求<b
 server端的HeartBeatResponseHandler监听心跳并作出响应<br/>
 
 3. server端推送消息到client端 <br/>
-PushHandler和PushConfirmHandler <br/><br/>
+客户端使用PushConfirmHandler处理 <br/>
+
+服务端 <br/>
+
+RegisterResponseHandler中channelRead()里，如果客户端注册成功则把channel对象保存到NettyChannelMap这个Map里去
+```java
+String clientId = header.getAlias();
+			ctx.channel().attr(ChannelAttrKey.KEY_CLIENT_ID).set(clientId);
+			NettyChannelMap.put(clientId, ctx.channel());
+```
+
+
+应用服务器通过访问 http接口 http://localhost:10200/api/** <br/>
+后台ApiController把消息的内容写入缓存ToSendMap.aliasMap中去，如
+<code>ToSendMap.aliasMap.put(alias, list);</code> <br/>
+
+定时任务<code>com.appjishu.fpush.server.boot.SendTask#scan</code>每隔一定的时间间隔，会扫描ToSendMap.aliasMap<br/>
+里的待发送的消息.  遍历后，会通过<code>NettyChannelMap.get(alias)</code>获取到Channel,然后 channel.writeAndFlush(message) <br/>
+发送出去
+
+```java
+@Scheduled(fixedRate = 5000)
+    public void scan() {
+        for (Map.Entry<String, List<MsgData>> entry: ToSendMap.aliasMap.entrySet()) {
+            String alias = entry.getKey();
+            List<MsgData> msgList = entry.getValue();
+            if (StringUtils.isNotEmpty(alias) && msgList != null && msgList.size() > 0) {
+                pushService.doPush(msgList, alias);
+            }
+        }
+
+    }
+```
+
+
+```java
+Channel channel = NettyChannelMap.get(alias);
+ChannelFuture future = channel.writeAndFlush(fMessage);
+```
+<br/>
+<br/>
 
 4. 客户端长连接的鉴权 <br/>
 客户端(即fpush-client)发送appId + appKey，经后台鉴定权限通过后，获取到clientToken <br/>
@@ -81,3 +121,8 @@ appId+clientToken
 <br/>
 2. 增加IdleStateHandler来对heartbeat进行监控，设定的时间间隔内没有收到心跳，就断开连接
 Netty的IdleStateHandler会根据用户的使用场景，启动三类定时任务，分别是：ReaderIdleTimeoutTask、WriterIdleTimeoutTask和AllIdleTimeoutTask，它们都会被加入到NioEventLoop的Task队列中被调度和执行。
+<br/>
+3. server端长连接的超时时间的设置<br/>
+我们是长连接服务，手机端和服务端要维持这个长连接，需要定期的发送心跳消息，我们为了节约电量和流量，手机端采用的是智能心跳模式。那么对服务端来说，它是不知道手机端下次是几分钟之后会发送心跳上来的，那么这个连接在服务端的超时时间应该设置多久就是一个问题了。
+客户端在每一次的心跳消息中携带下一次的心跳时间。服务端就根据这个时间来设置连接的超时时间。
+<br/>
