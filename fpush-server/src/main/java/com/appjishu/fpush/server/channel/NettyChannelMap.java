@@ -27,9 +27,9 @@ public class NettyChannelMap {
         return map.get(clientId);
     }
 
-    public static void remove(Channel socketChannel) {
-        for (Map.Entry entry : map.entrySet()) {
-            if (entry.getValue() == socketChannel) {
+    public static void remove(Channel channel) {
+        for (Map.Entry<String, Channel> entry : map.entrySet()) {
+            if(channel.compareTo(entry.getValue()) == 0){
                 map.remove(entry.getKey());
             }
         }

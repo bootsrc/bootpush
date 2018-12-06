@@ -22,7 +22,7 @@ public class SendTask {
 //    }
 
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 100)
     public void scan() {
         for (Map.Entry<String, List<MsgData>> entry: ToSendMap.aliasMap.entrySet()) {
             String alias = entry.getKey();

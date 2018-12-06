@@ -18,6 +18,12 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class RegisterResponseHandler extends ChannelInboundHandlerAdapter {
 	private static final Logger log = LoggerFactory.getLogger(RegisterResponseHandler.class);
+
+	@Override
+	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+		NettyChannelMap.remove(ctx.channel());
+		ctx.fireChannelInactive();
+	}
 	
 	@Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
