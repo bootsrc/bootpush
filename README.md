@@ -34,11 +34,7 @@ Step3 后台发送消息给fpush-client (用来模拟android，ios或者网页�
 </code></pre>
 
 Step4 Android演示
-
-<video id="video" controls="" preload="none" poster=doc/post.jpg">
-<source id="mp4" src="doc/demo.mp4" type="video/mp4">
-</video>
-
+![](doc/post.jpg)
 <br/>
 
 server效果图<br/>
