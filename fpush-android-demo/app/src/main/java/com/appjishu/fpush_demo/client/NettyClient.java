@@ -1,10 +1,13 @@
 package com.appjishu.fpush_demo.client;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.appjishu.fpush.core.model.MsgUser;
 import com.appjishu.fpush.core.model.ResponseData;
 import com.appjishu.fpush.core.proto.FMessage;
+import com.appjishu.fpush_demo.activity.MainActivity;
+import com.appjishu.fpush_demo.boot.MyApp;
 import com.appjishu.fpush_demo.constant.NetConstant;
 import com.appjishu.fpush_demo.constant.OneUser;
 import com.appjishu.fpush_demo.handler.HeartBeatRequestHandler;
@@ -62,7 +65,8 @@ public class NettyClient {
         FormBody formBody = new FormBody.Builder().add("appId", appId + "")
                 .add("appKey", appKey).build();
 
-        Request request = new Request.Builder().url(NetConstant.SITE + NetConstant.KEY_TOKEN_URL)
+        String urlStr = "http://" + NetConstant.PUSH_HOST + ":" + NetConstant.API_PORT + NetConstant.KEY_TOKEN_URL;
+        Request request = new Request.Builder().url(urlStr)
                 .post(formBody)
                 .build();
 
@@ -79,11 +83,15 @@ public class NettyClient {
                 if (response.code() == 200) {
                     String responseStr = response.body().string();
 //                    ResponseData responseData = JSON.parseObject(responseStr, ResponseData.class);
-                    ResponseData responseData =gson.fromJson(responseStr, ResponseData.class);
+                    ResponseData responseData = gson.fromJson(responseStr, ResponseData.class);
 
                     if (responseData.getCode() == 0) {
                         String clientToken = (String) responseData.getData();
                         try {
+//                            MainActivity mainActivity = MainActivity.getInstance();
+//                            if (mainActivity != null) {
+//                                Toast.makeText(MainActivity.getInstance(), "连接成功！", Toast.LENGTH_SHORT).show();
+//                            }
                             doStart(appId, clientToken);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -103,7 +111,7 @@ public class NettyClient {
         msgUser.setAccount(OneUser.ACCOUNT);
         msgUser.setAppId(appId);
         msgUser.setAppToken(clientToken);
-        String logText = "---register_config_appId=" +  appId + ",clientToken=" + clientToken;
+        String logText = "---register_config_appId=" + appId + ",clientToken=" + clientToken;
         Log.d(MY_TAG, logText);
         CurrentUser.setInfo(msgUser);
 

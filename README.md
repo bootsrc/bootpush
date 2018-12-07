@@ -33,6 +33,12 @@ Step3 后台发送消息给fpush-client (用来模拟android，ios或者网页�
 2018-11-19 14:29:17.067  INFO 27780 --- [ntLoopGroup-2-1] c.a.f.client.handler.PushConfirmHandler  : --->>>这是推送到客户端的消息:description=这是一条推送给lsm001的消息!
 </code></pre>
 
+Step4 Android演示
+
+<video id="video" controls="" preload="none" poster=doc/post.jpg">
+<source id="mp4" src="doc/demo.mp4" type="video/mp4">
+</video>
+
 <br/>
 
 server效果图<br/>

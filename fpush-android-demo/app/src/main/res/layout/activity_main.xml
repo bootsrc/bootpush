@@ -6,13 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:textSize="10sp"
+            android:text="@string/introduce"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textSize="15sp"
+                android:text="@string/host_lable" />
+
+            <EditText
+                android:id="@+id/host_field"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:textSize="15sp"
+                android:text="@string/host_value"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textSize="15sp"
+                android:text="@string/api_port_lable" />
+
+            <EditText
+                android:id="@+id/api_port_field"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textSize="15sp"
+                android:text="@string/api_port_value"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textSize="15sp"
+                android:text="@string/tcp_port_lable" />
+
+            <EditText
+                android:id="@+id/tcp_port_field"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textSize="15sp"
+                android:text="@string/tcp_port_value"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/connect_btn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/holo_blue_bright"
+            android:text="@string/btn_connect_text"/>
+
+    </LinearLayout>
+
+
+
+
 
 </android.support.constraint.ConstraintLayout>
