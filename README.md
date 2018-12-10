@@ -15,6 +15,15 @@ fpush-server server端， 接受来自自己的应用服务器的http推送请�
 实现消息推送，即时通讯技术。<br/>
 fpush-client 客户端，模拟App或者网页，或者桌面应用的客户端 <br/>
 
+## 系统架构
+
+系统部署架构图如下：
+<br/><br/>
+<br/>
+![](doc/arch-1.png)
+<br/>
+<br/>
+<br/>
 ## 运行
 eclipse/IDEA里 <br/>
 Step1 右键run as--java application-- FpushServerApp.java <br/>
@@ -37,12 +46,14 @@ Step4 Android演示 <br/>
 ![](doc/post.jpg)
 <br/>
 
-server效果图<br/>
+server效果图
+<br/>
 ![](doc/server.png)
-<br/>
+<br/><br/>
 client在eclipse上调试的效果图-eclipse console可以显示中文字符<br/>
-![](doc/client.png)
 <br/>
+![](doc/client.png)
+<br/><br/>
 
 ## 测试
 注册一个应用账号，手机号是15600000000
