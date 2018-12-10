@@ -33,20 +33,42 @@ public interface FHeaderOrBuilder extends
       getRegIdBytes();
 
   /**
+   * <pre>
+   **
+   * 用别名来标识一个用户。一个设备只能绑定一个别名
+   * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户单设备在线聊天的应用场景
+   * </pre>
+   *
    * <code>string alias = 5;</code>
    */
   java.lang.String getAlias();
   /**
+   * <pre>
+   **
+   * 用别名来标识一个用户。一个设备只能绑定一个别名
+   * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户单设备在线聊天的应用场景
+   * </pre>
+   *
    * <code>string alias = 5;</code>
    */
   com.google.protobuf.ByteString
       getAliasBytes();
 
   /**
+   * <pre>
+   **
+   * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户多设备同时在线聊天的应用场景
+   * </pre>
+   *
    * <code>string account = 6;</code>
    */
   java.lang.String getAccount();
   /**
+   * <pre>
+   **
+   * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户多设备同时在线聊天的应用场景
+   * </pre>
+   *
    * <code>string account = 6;</code>
    */
   com.google.protobuf.ByteString

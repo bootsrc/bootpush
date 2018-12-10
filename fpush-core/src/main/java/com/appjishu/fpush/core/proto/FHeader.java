@@ -204,6 +204,12 @@ private static final long serialVersionUID = 0L;
   public static final int ALIAS_FIELD_NUMBER = 5;
   private volatile java.lang.Object alias_;
   /**
+   * <pre>
+   **
+   * 用别名来标识一个用户。一个设备只能绑定一个别名
+   * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户单设备在线聊天的应用场景
+   * </pre>
+   *
    * <code>string alias = 5;</code>
    */
   public java.lang.String getAlias() {
@@ -219,6 +225,12 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   **
+   * 用别名来标识一个用户。一个设备只能绑定一个别名
+   * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户单设备在线聊天的应用场景
+   * </pre>
+   *
    * <code>string alias = 5;</code>
    */
   public com.google.protobuf.ByteString
@@ -238,6 +250,11 @@ private static final long serialVersionUID = 0L;
   public static final int ACCOUNT_FIELD_NUMBER = 6;
   private volatile java.lang.Object account_;
   /**
+   * <pre>
+   **
+   * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户多设备同时在线聊天的应用场景
+   * </pre>
+   *
    * <code>string account = 6;</code>
    */
   public java.lang.String getAccount() {
@@ -253,6 +270,11 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
+   * <pre>
+   **
+   * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户多设备同时在线聊天的应用场景
+   * </pre>
+   *
    * <code>string account = 6;</code>
    */
   public com.google.protobuf.ByteString
@@ -987,6 +1009,12 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object alias_ = "";
     /**
+     * <pre>
+     **
+     * 用别名来标识一个用户。一个设备只能绑定一个别名
+     * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户单设备在线聊天的应用场景
+     * </pre>
+     *
      * <code>string alias = 5;</code>
      */
     public java.lang.String getAlias() {
@@ -1002,6 +1030,12 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     **
+     * 用别名来标识一个用户。一个设备只能绑定一个别名
+     * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户单设备在线聊天的应用场景
+     * </pre>
+     *
      * <code>string alias = 5;</code>
      */
     public com.google.protobuf.ByteString
@@ -1018,6 +1052,12 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     **
+     * 用别名来标识一个用户。一个设备只能绑定一个别名
+     * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户单设备在线聊天的应用场景
+     * </pre>
+     *
      * <code>string alias = 5;</code>
      */
     public Builder setAlias(
@@ -1031,6 +1071,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     **
+     * 用别名来标识一个用户。一个设备只能绑定一个别名
+     * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户单设备在线聊天的应用场景
+     * </pre>
+     *
      * <code>string alias = 5;</code>
      */
     public Builder clearAlias() {
@@ -1040,6 +1086,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     **
+     * 用别名来标识一个用户。一个设备只能绑定一个别名
+     * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户单设备在线聊天的应用场景
+     * </pre>
+     *
      * <code>string alias = 5;</code>
      */
     public Builder setAliasBytes(
@@ -1056,6 +1108,11 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object account_ = "";
     /**
+     * <pre>
+     **
+     * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户多设备同时在线聊天的应用场景
+     * </pre>
+     *
      * <code>string account = 6;</code>
      */
     public java.lang.String getAccount() {
@@ -1071,6 +1128,11 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     **
+     * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户多设备同时在线聊天的应用场景
+     * </pre>
+     *
      * <code>string account = 6;</code>
      */
     public com.google.protobuf.ByteString
@@ -1087,6 +1149,11 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
+     * <pre>
+     **
+     * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户多设备同时在线聊天的应用场景
+     * </pre>
+     *
      * <code>string account = 6;</code>
      */
     public Builder setAccount(
@@ -1100,6 +1167,11 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     **
+     * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户多设备同时在线聊天的应用场景
+     * </pre>
+     *
      * <code>string account = 6;</code>
      */
     public Builder clearAccount() {
@@ -1109,6 +1181,11 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
+     * <pre>
+     **
+     * 推送消息给某个用户，一般用这个用户的应用系统中的userId设置成alias，适用于单用户多设备同时在线聊天的应用场景
+     * </pre>
+     *
      * <code>string account = 6;</code>
      */
     public Builder setAccountBytes(
