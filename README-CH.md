@@ -50,10 +50,16 @@ protoc --java_out=. fmessage.proto
 就可以生成FMessage之类的protobuf实体类，例如
 <code>com.appjishu.fpush.core.proto.FMessage</code>
 
-### 4.2注册鉴权
-每个应用服务器需要在fpush-server上注册一个账号, 得到相应的三个参数APP_ID, APP_KEY, APP_SECRET_KEY <br/>
+### 4.2应用服务器的注册
 
-Android和iOS客户端通过访问http接口<code>serverHost:10200/app/keyToken</code> 获取到clientToken
+每个应用服务器需要在fpush-server上注册一个账号, 得到相应的三个参数APP_ID, APP_KEY, APP_SECRET_KEY <br/>
+应用服务器应该请求fpush-server的这个http接口<code>http://serverHost:10200/app/registerAccount</code>
+<br/>
+
+### 4.3长连接注册鉴权
+
+
+Android和iOS客户端通过访问http接口<code>http://serverHost:10200/app/keyToken</code> 获取到clientToken
 参数是<code>long appId, String appKey</code> 。 这里就是上面提到的APP_ID, APP_KEY
 Android端代码如下:
 ```java
@@ -186,7 +192,15 @@ fpush-server的RegisterResponseHandler会进行后台鉴权处理, 原理图
 <br/>
 <br/>
 <br/>
-### 4.3心跳机制与TCP超时处理
+
+### 4.4应用服务器鉴权
+应用服务端的http连接的鉴权 <br/>
+应用服务端（即app server）发送appId + appSecretKey到http接口<code>http://serverHost:10200/app/secretToken</code>
+，经后台鉴定权限通过后，获取到appToken
+应用服务端每次调用fpush-server的http api都需要带上appId+appToken
+
+
+### 4.5心跳机制与TCP超时处理
 tcp通信图如下:
 <br/><br/>
 ![](doc/tcp.png)
@@ -194,17 +208,25 @@ tcp通信图如下:
 客户端使用的是HeartBeatRequestHandler并定期发送Heartbeat ping,fpush-server使用HeartBeatResponseHandler<br/>
 发送hearbeat pong进行回应 <br/>
 
-### 4.4保存fpush-server端的通道映射关系
+### 4.6保存fpush-server端的通道映射关系
 RegisterResponseHandler中channelRead()里，如果客户端注册成功则把channel对象保存到NettyChannelMap这个Map里去
 ```java
 String clientId = header.getAlias();
 			ctx.channel().attr(ChannelAttrKey.KEY_CLIENT_ID).set(clientId);
 			NettyChannelMap.put(clientId, ctx.channel());
 ```
+保存了通道的映射关系后，就可以在收到应用服务器发给fpush-server的消息后，通过Netty框架来实时把消息推送到Android客户端<br/>
+<code>channel.writeAndFlush(message) </code>
+<br/>
 
-### 4.5推送过程
+### 4.7推送过程
 
 应用服务器通过访问 http接口 http://localhost:10200/api/** <br/>
+例如
+[http://localhost:10200/api/pushTest?desc=0123](http://localhost:10200/api/pushTest?desc=0123)
+<br/>就是发送一条测试消息，描述为0123，发送给Android/iOS客户端
+
+
 后台ApiController把消息的内容写入缓存ToSendMap.aliasMap中去，如
 <code>ToSendMap.aliasMap.put(alias, list);</code> <br/>
 
