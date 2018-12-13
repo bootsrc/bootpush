@@ -4,7 +4,7 @@ fpush是即时消息推送服务程序. <br/>
 旨在做一个类似于极光推送，小米推送之类的Java程序开源实现。基于Netty + protobuf
 <br/>
 👉 [fpush源码解析与使用(中文)](https://github.com/flylib/fpush/blob/master/README-CH.md)
-🚩
+
 ## 技术栈
 1. JDK1.8 <br/>
 2. Netty-4.1.31.Final <br/>
