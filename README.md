@@ -3,6 +3,7 @@
 fpush是即时消息推送服务程序. <br/>
 旨在做一个类似于极光推送，小米推送之类的Java程序开源实现。基于Netty + protobuf
 <br/>
+[fpush源码解析与使用(中文)](https://github.com/flylib/fpush/blob/master/README-CH.md)
 
 ## 技术栈
 1. JDK1.8 <br/>
@@ -37,71 +38,7 @@ tcp通信图如下:
 ![](doc/tcp.png)
 <br/>
 
-客户端使用PushConfirmHandler处理 <br/>
-
-服务端 <br/>
-
-RegisterResponseHandler中channelRead()里，如果客户端注册成功则把channel对象保存到NettyChannelMap这个Map里去
-```java
-String clientId = header.getAlias();
-			ctx.channel().attr(ChannelAttrKey.KEY_CLIENT_ID).set(clientId);
-			NettyChannelMap.put(clientId, ctx.channel());
-```
-
-
-应用服务器通过访问 http接口 http://localhost:10200/api/** <br/>
-后台ApiController把消息的内容写入缓存ToSendMap.aliasMap中去，如
-<code>ToSendMap.aliasMap.put(alias, list);</code> <br/>
-
-定时任务<code>com.appjishu.fpush.server.boot.SendTask#scan</code>每隔一定的时间间隔，会扫描ToSendMap.aliasMap<br/>
-里的待发送的消息.  遍历后，会通过<code>NettyChannelMap.get(alias)</code>获取到Channel,然后 channel.writeAndFlush(message) <br/>
-发送出去
-
-```java
-@Scheduled(fixedRate = 5000)
-    public void scan() {
-        for (Map.Entry<String, List<MsgData>> entry: ToSendMap.aliasMap.entrySet()) {
-            String alias = entry.getKey();
-            List<MsgData> msgList = entry.getValue();
-            if (StringUtils.isNotEmpty(alias) && msgList != null && msgList.size() > 0) {
-                pushService.doPush(msgList, alias);
-            }
-        }
-
-    }
-```
-
-
-```java
-public void doPush(List<MsgData> msgList, String alias) {
-        FMessage fMessage = buildPushMessage(msgList, alias);
-        if (fMessage != null) {
-            log.info("---TringToDoPush()--->");
-            Channel channel = NettyChannelMap.get(alias);
-            if (channel == null) {
-                log.info("------channelIsNull---");
-            } else if (!channel.isWritable()) {
-                log.info("------channelIsNotWritable---");
-            } else {
-                ChannelFuture future = channel.writeAndFlush(fMessage);
-                log.info("------msgWriten!!!---");
-                future.addListener(new ChannelFutureListener() {
-                    public void operationComplete(final ChannelFuture future)
-                            throws Exception {
-                        if (msgList.size() > 0) {
-                            msgList.remove(0);
-                            log.info("------removeAreadySentMsg!!!---");
-                        }
-                    }
-                });
-            }
-        }
-    }
-```
-<br/>
-<br/>
-
-
+[fpush源码解析与使用(中文)](https://github.com/flylib/fpush/blob/master/README-CH.md)
 
 ## 运行
 eclipse/IDEA里 <br/>
