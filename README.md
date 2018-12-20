@@ -84,14 +84,13 @@ http://localhost:10200/app/secretToken?appId=517723931931574272&appSecretKey=cb2
 
 <br/>
 http://localhost:10200/app/keyToken?appId=517723931931574272&appKey=9f5d74bb0f68
-<br/>
-
+<br/> <br/>
 
 然后浏览器请求
 <a href="http://localhost:10200/app/push?receiverAlias=lsm001&title=系统提醒&desc=消息内容001&data=abc">
 http://localhost:10200/app/push?receiverAlias=lsm001&title=系统提醒&desc=消息内容001&data=abc
  </a>
- <br/>
+ <br/><br/>
 查看所有的netty channel连接情况, 浏览器输入下面的网址
  <code>http://appjishu.com:10200/monitor/channelList</code>
 <br/>
