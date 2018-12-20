@@ -223,8 +223,12 @@ String clientId = header.getAlias();
 
 应用服务器通过访问 http接口 http://localhost:10200/api/** <br/>
 例如
-[http://localhost:10200/api/pushTest?desc=0123](http://localhost:10200/api/pushTest?desc=0123)
-<br/>就是发送一条测试消息，描述为0123，发送给Android/iOS客户端
+<a href="http://localhost:10200/app/push?receiverAlias=lsm001&title=系统提醒&desc=消息内容001&data=abc">
+http://localhost:10200/app/push?receiverAlias=lsm001&title=系统提醒&desc=消息内容001&data=abc
+ </a>
+<br/>
+就是发送一条测试消息，描述为<code>消息内容001</code>,标题为<code>系统提醒</code>，发送给Android/iOS客户端,<br/>
+接收者的alias为<code>lsm001</code> <br/>
 
 
 后台ApiController把消息的内容写入缓存ToSendMap.aliasMap中去，如

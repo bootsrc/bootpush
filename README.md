@@ -49,7 +49,11 @@ Step3 后台发送消息给fpush-client (用来模拟android，ios或者网页�
 浏览器访问    <a href="http://localhost:10200">http://localhost:10200</a> <br/>
 显示Welcome to fpush application!，  说明server运行起来了<br/>
 然后浏览器请求
- <a href="http://localhost:10200/api/pushTest">http://localhost:10200/api/pushTest</a>
+<a href="http://localhost:10200/app/push?receiverAlias=lsm001&title=系统提醒&desc=消息内容001&data=abc">
+http://localhost:10200/app/push?receiverAlias=lsm001&title=系统提醒&desc=消息内容001&data=abc
+ </a>
+ 
+ 
  <br/>
  如果浏览器返回OK
  并且fpush-client打印出下面的信息，说明推送消息成功
@@ -80,6 +84,22 @@ http://localhost:10200/app/secretToken?appId=517723931931574272&appSecretKey=cb2
 
 <br/>
 http://localhost:10200/app/keyToken?appId=517723931931574272&appKey=9f5d74bb0f68
+<br/>
+
+
+然后浏览器请求
+<a href="http://localhost:10200/app/push?receiverAlias=lsm001&title=系统提醒&desc=消息内容001&data=abc">
+http://localhost:10200/app/push?receiverAlias=lsm001&title=系统提醒&desc=消息内容001&data=abc
+ </a>
+ <br/>
+查看所有的netty channel连接情况, 浏览器输入下面的网址
+ <code>http://appjishu.com:10200/monitor/channelList</code>
+<br/>
+
+Android客户端演示可以直接使用apk文件装到自己的android手机上去<br/>
+[](https://github.com/flylib/fpush/blob/master/doc/fpush-android-demo.apk)
+<br/>
+里面的测试host就是我个人的服务器<code>host:appjishu.com</code>
 <br/>
 
 ## Done List

@@ -1,13 +1,10 @@
 package com.appjishu.fpush_demo.client;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.appjishu.fpush.core.model.MsgUser;
 import com.appjishu.fpush.core.model.ResponseData;
 import com.appjishu.fpush.core.proto.FMessage;
-import com.appjishu.fpush_demo.activity.MainActivity;
-import com.appjishu.fpush_demo.boot.MyApp;
 import com.appjishu.fpush_demo.constant.NetConstant;
 import com.appjishu.fpush_demo.constant.OneUser;
 import com.appjishu.fpush_demo.handler.HeartBeatRequestHandler;
@@ -65,7 +62,7 @@ public class NettyClient {
         FormBody formBody = new FormBody.Builder().add("appId", appId + "")
                 .add("appKey", appKey).build();
 
-        String urlStr = "http://" + NetConstant.PUSH_HOST + ":" + NetConstant.API_PORT + NetConstant.KEY_TOKEN_URL;
+        String urlStr = "http://" + NetConstant.PUSH_HOST + ":" + NetConstant.HTTP_PORT + NetConstant.KEY_TOKEN_URL;
         Request request = new Request.Builder().url(urlStr)
                 .post(formBody)
                 .build();

@@ -34,4 +34,8 @@ public class NettyChannelMap {
             }
         }
     }
+
+    public static Map<String, Channel> getMap() {
+        return map;
+    }
 }

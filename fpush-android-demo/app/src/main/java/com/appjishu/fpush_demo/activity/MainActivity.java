@@ -15,6 +15,8 @@ import com.appjishu.fpush_demo.R;
 import com.appjishu.fpush_demo.boot.MsgService;
 import com.appjishu.fpush_demo.constant.NetConstant;
 import com.appjishu.fpush_demo.constant.SysConstant;
+import com.appjishu.fpush_demo.model.NetConfig;
+import com.appjishu.fpush_demo.util.SharedPreferencesUtil;
 
 public class MainActivity extends AppCompatActivity {
     public static final int MSG_WHAT_MSG = 0;
@@ -38,8 +40,15 @@ public class MainActivity extends AppCompatActivity {
         msgHandler = new MsgHandler();
 
         hostEditText = findViewById(R.id.host_field);
-        httpPortEditText =findViewById(R.id.api_port_field);
+        httpPortEditText = findViewById(R.id.api_port_field);
         tcpPortEditText = findViewById(R.id.tcp_port_field);
+
+        NetConfig netConfig = SharedPreferencesUtil.queryNetConstant(this);
+        if (netConfig != null) {
+            hostEditText.setText(netConfig.getPushHost());
+            httpPortEditText.setText(netConfig.getHttpPort() + "");
+            tcpPortEditText.setText(netConfig.getPushPort() + "");
+        }
         connectBtn = findViewById(R.id.connect_btn);
         connectBtn.setOnClickListener(new ButtonClickListener());
 
@@ -73,18 +82,24 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 NetConstant.PUSH_HOST = host;
             }
-            if (TextUtils.isEmpty(httpPort)){
+            if (TextUtils.isEmpty(httpPort)) {
                 Toast.makeText(MainActivity.this, "请输入HTTP_Port", Toast.LENGTH_SHORT).show();
                 return;
             } else {
-                NetConstant.API_PORT = Integer.valueOf(httpPort);
+                NetConstant.HTTP_PORT = Integer.valueOf(httpPort);
             }
-            if (TextUtils.isEmpty(tcpPort)){
+            if (TextUtils.isEmpty(tcpPort)) {
                 Toast.makeText(MainActivity.this, "请输入TCP_Port", Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 NetConstant.PUSH_PORT = Integer.valueOf(tcpPort);
             }
+
+            NetConfig netConfig = new NetConfig();
+            netConfig.setPushHost(NetConstant.PUSH_HOST);
+            netConfig.setHttpPort(NetConstant.HTTP_PORT);
+            netConfig.setPushPort(NetConstant.PUSH_PORT);
+            SharedPreferencesUtil.storeNetConstant(MainActivity.this, netConfig);
 
             Intent intent = new Intent(MainActivity.this, MsgService.class);
             MainActivity.this.startService(intent);
