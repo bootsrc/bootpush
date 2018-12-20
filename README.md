@@ -97,7 +97,7 @@ http://localhost:10200/app/push?receiverAlias=lsm001&title=系统提醒&desc=消
 <br/>
 
 Android客户端演示可以直接使用apk文件装到自己的android手机上去<br/>
-[](https://github.com/flylib/fpush/blob/master/doc/fpush-android-demo.apk)
+[](https://github.com/flylib/fpush/blob/master/fpush-android-demo/app/release/fpush-android-demo.apk)
 <br/>
 里面的测试host就是我个人的服务器<code>host:appjishu.com</code>
 <br/>
