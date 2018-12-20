@@ -65,6 +65,7 @@ http://localhost:10200/app/push?receiverAlias=lsm001&title=系统提醒&desc=消
 Step4 Android演示 <br/>
 ![](doc/post.jpg)
 <br/>
+演示视频如下[demo.mp4](https://github.com/flylib/fpush/blob/master/doc/demo.mp4)
 
 server效果图
 <br/>
