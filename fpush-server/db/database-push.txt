@@ -1,0 +1,38 @@
+1.更改数据库的编码为utf8mb4:
+a. MySQL的版本
+utf8mb4的最低mysql版本支持版本为5.5.3+，若不是，请升级到较新版本。
+b. MySQL驱动
+5.1.34可用,最低不能低于5.1.13
+c.修改MySQL配置文件
+修改mysql配置文件my.cnf（windows为my.ini）
+my.cnf一般在etc/mysql/my.cnf位置。找到后请在以下三部分里添加如下内容：
+[client]
+default-character-set = utf8mb4
+[mysql]
+default-character-set = utf8mb4
+[mysqld]
+character-set-client-handshake = FALSE
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+init_connect='SET NAMES utf8mb4'
+
+
+2.创建数据库fpush
+create database push;
+3.分配push数据库的权限
+
+use mysql;
+
+select host, user from user;
+
+create user push identified by 'pushBigTech';
+
+grant all on push.* to push@'%'  with grant option;
+
+flush privileges;
+
+4.重启mariadb/mysql
+ps -ef |grep mysql
+kill all this processes, then
+service mariadb start
+

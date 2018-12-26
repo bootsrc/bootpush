@@ -5,6 +5,10 @@ fpush是即时消息推送服务程序. <br/>
 <br/>
 👉 [fpush源码解析与使用(中文)](https://github.com/flylib/fpush/blob/master/README-CH.md)
 
+fpush监控后台<br/>
+[http://fpush-admin.appjishu.com](http://fpush-admin.appjishu.com)
+<br/>
+
 ## 技术栈
 1. JDK1.8 <br/>
 2. Netty-4.1.31.Final <br/>
@@ -102,6 +106,9 @@ Android客户端演示可以直接使用apk文件装到自己的android手机上
 里面的测试host就是我个人的服务器<code>host:appjishu.com</code>
 <br/>
 
+fpush监控后台<br/>
+[http://fpush-admin.appjishu.com](http://fpush-admin.appjishu.com)
+<br/>
 ## Done List
 🚩🚩🚩
 1. netty+protobuf <br/>

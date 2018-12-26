@@ -3,6 +3,10 @@
 ## 1.概述
 基于SDK的消息推送服务。旨在做一个类似于极光推送、各推、小米推送之类的Java程序开源实现。开发平台是Java。<br/>
 用于Java服务端推送实时和离线消息到Android/iOS客户端。 适用于推送消息和App端的即时通讯im场景。<br/>
+<br/><br/>
+fpush监控后台<br/>
+[http://fpush-admin.appjishu.com](http://fpush-admin.appjishu.com)
+<br/>
 
 ## 2.技术选型
 要满足大量的连接数、同时支持双全工通信，并且性能也得有保障。我对Java语言比较擅长，于是选择了Java来实现。在 Java 技术栈中进行选型<br/>

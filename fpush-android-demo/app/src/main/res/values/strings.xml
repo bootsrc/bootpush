@@ -5,8 +5,8 @@
     <string name="api_port_lable">HTTP_Port</string>
     <string name="tcp_port_lable">TCP_Port</string>
     <string name="btn_connect_text">连接到FPUSH</string>
-    <string name="host_value">appjishu.com</string>
-    <string name="api_port_value">10200</string>
+    <string name="host_value">fpushserver.appjishu.com</string>
+    <string name="api_port_value">80</string>
     <string name="tcp_port_value">9910</string>
     <string name="introduce">提示：HTTP_Port和TCP_Port一般不用修改，HOST填FPUSH后台的ip</string>
 </resources>

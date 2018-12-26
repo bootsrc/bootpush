@@ -2,14 +2,13 @@ package com.appjishu.fpush.server.controller;
 
 import com.appjishu.fpush.core.model.MsgData;
 import com.appjishu.fpush.server.constant.ExceptionMsg;
+import com.appjishu.fpush.server.model.PushParam;
 import com.appjishu.fpush.server.singleton.ToSendMap;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.alibaba.fastjson.JSON;
 import com.appjishu.fpush.core.model.ResponseData;
@@ -52,9 +51,20 @@ public class AppController {
      * @param data
      * @return
      */
+    @CrossOrigin(origins = "*", maxAge = 3600)
     @RequestMapping("/push")
-    public String push(String receiverAlias, String title, String desc, String data) {
-        if (StringUtils.isEmpty(title) || StringUtils.isEmpty(desc) || StringUtils.isEmpty(data)) {
+    public String push(@RequestBody PushParam pushParam) {
+        if (pushParam == null) {
+            log.info(ExceptionMsg.PUSH_PARAM_EMPTY);
+            return ExceptionMsg.PUSH_PARAM_EMPTY;
+        }
+
+        String receiverAlias = pushParam.getReceiverAlias();
+        String title = pushParam.getTitle();
+        String desc= pushParam.getDesc();
+        String data = pushParam.getData();
+
+        if (StringUtils.isEmpty(title) || StringUtils.isEmpty(desc)) {
             log.info(ExceptionMsg.PUSH_PARAM_EMPTY);
             return ExceptionMsg.PUSH_PARAM_EMPTY;
         }
