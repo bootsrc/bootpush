@@ -5,7 +5,7 @@
 用于Java服务端推送实时和离线消息到Android/iOS客户端。 适用于推送消息和App端的即时通讯im场景。<br/>
 <br/><br/>
 fpush监控后台<br/>
-[http://fpush-admin.appjishu.com](http://fpush-admin.appjishu.com)
+👉 [http://fpush-admin.appjishu.com](http://fpush-admin.appjishu.com)
 <br/>
 
 ## 2.技术选型
