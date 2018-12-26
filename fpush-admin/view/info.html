@@ -13,10 +13,11 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script src="js/common/config.js"></script>
+    <link rel="stylesheet" href="css/common.css">
 </head>
 <body>
 
-<div id="app">
+<div id="app" class="app-common">
     <div style="height: 50px"></div>
     <p>在线的设备</p>
 
@@ -57,8 +58,8 @@
             <el-form-item label="文本内容" :label-width="formLabelWidth">
                 <el-input v-model="pushForm.desc" ></el-input>
             </el-form-item>
-            <el-form-item label="数据(json格式)" :label-width="formLabelWidth" placeholder="可以为空">
-                <el-input v-model="pushForm.data" ></el-input>
+            <el-form-item label="数据(json格式)" :label-width="formLabelWidth" >
+                <el-input v-model="pushForm.data" placeholder="可以为空" ></el-input>
             </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
