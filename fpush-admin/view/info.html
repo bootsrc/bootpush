@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="..">
+    <title>fpush监控</title>
+    <meta charset="UTF-8">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- import Vue before Element -->
+    <script src="lib/vue/vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="js/common/config.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <div style="height: 50px"></div>
+    <p>在线的设备</p>
+
+    <el-table
+            :data="tableData"
+            style="width: 100%">
+        <el-table-column
+                label="用户名"
+                width="180">
+            <template slot-scope="scope">
+                <span style="margin-left: 10px">{{ scope.row.alias }}</span>
+            </template>
+        </el-table-column>
+        <el-table-column
+                label="是否在线"
+                width="180">
+            <template slot-scope="scope">
+                <span style="margin-left: 10px">{{ scope.row.active }}</span>
+            </template>
+        </el-table-column>
+        <el-table-column label="操作">
+            <template slot-scope="scope">
+                <el-button
+                        size="mini"
+                        @click="openPushDialog(scope.$index, scope.row)">发送消息</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+
+    <el-dialog title="推送消息" :visible.sync="dialogFormVisible">
+        <el-form :model="pushForm">
+            <el-form-item label="接收用户名" :label-width="formLabelWidth">
+                <el-input v-model="pushForm.receiverAlias" autocomplete="off" :disabled="true"></el-input>
+            </el-form-item>
+            <el-form-item label="标题" :label-width="formLabelWidth">
+                <el-input v-model="pushForm.title" ></el-input>
+            </el-form-item>
+            <el-form-item label="文本内容" :label-width="formLabelWidth">
+                <el-input v-model="pushForm.desc" ></el-input>
+            </el-form-item>
+            <el-form-item label="数据(json格式)" :label-width="formLabelWidth" placeholder="可以为空">
+                <el-input v-model="pushForm.data" ></el-input>
+            </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="push()">确 定</el-button>
+        </div>
+    </el-dialog>
+</div>
+
+<script>
+    var ctxPath =  CustomConfig.urlBase;
+    console.log(ctxPath);
+</script>
+<script src="js/info.js"></script>
+</body>
+</html>
