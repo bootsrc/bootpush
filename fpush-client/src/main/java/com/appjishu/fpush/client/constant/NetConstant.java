@@ -5,5 +5,5 @@ public class NetConstant {
     public static final String APP_KEY = "9f5d74bb0f68";
 
     public static final String SITE = "http://localhost:10200";
-    public static final String KEY_TOKEN_URL = "/app/keyToken";
+    public static final String KEY_TOKEN_URL = "/client/keyToken";
 }
