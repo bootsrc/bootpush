@@ -33,19 +33,7 @@ fpush-client 客户端，模拟App或者网页，或者桌面应用的客户端 
 <br/>
 <br/>
 <br/>
-
-### 2. 移动客户端鉴定权限原理
-<br/><br/>
-![](doc/client-passport.png)
-<br/>
-<br/>
-<br/>
-
-### 3. server端推送消息到client端的原理 <br/>
-tcp通信图如下:
-<br/><br/>
-![](doc/tcp.png)
-<br/>
+源码和技术架构分析详情见
 
 👉  [fpush源码解析与使用(中文)](https://github.com/flylib/fpush/blob/master/README-CH.md)
 
