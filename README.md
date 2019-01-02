@@ -5,7 +5,7 @@ fpush是即时消息推送服务程序. <br/>
 <br/>
 👉 [fpush源码解析与使用(中文)](https://github.com/flylib/fpush/blob/master/README-CH.md)
 
-fpush监控后台<br/>
+fpush监控后台，点击进入演示<br/>
 👉 [http://fpush-admin.appjishu.com](http://fpush-admin.appjishu.com)
 <br/>
 <br/>
