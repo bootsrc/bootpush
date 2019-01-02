@@ -8,6 +8,11 @@ fpush是即时消息推送服务程序. <br/>
 fpush监控后台<br/>
 👉 [http://fpush-admin.appjishu.com](http://fpush-admin.appjishu.com)
 <br/>
+<br/>
+
+![](doc/fpush-demo.gif)
+
+<br/>
 
 ## 技术栈
 1. JDK1.8 <br/>
