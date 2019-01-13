@@ -3,7 +3,7 @@
 fpush是即时消息推送服务程序. <br/>
 旨在做一个类似于极光推送，小米推送之类的Java程序开源实现。基于Netty + protobuf
 <br/>
-👉 [fpush源码解析与使用(中文)](https://github.com/flylib/fpush/blob/master/README-CH.md)
+👉 [fpush源码解析与使用(中文)](https://github.com/liushaoming/fpush/blob/master/README-CH.md)
 
 fpush监控后台，点击进入演示<br/>
 👉 [http://fpush-admin.appjishu.com](http://fpush-admin.appjishu.com)
@@ -35,7 +35,7 @@ fpush-client 客户端，模拟App或者网页，或者桌面应用的客户端 
 <br/>
 源码和技术架构分析详情见
 
-👉  [fpush源码解析与使用(中文)](https://github.com/flylib/fpush/blob/master/README-CH.md)
+👉  [fpush源码解析与使用(中文)](https://github.com/liushaoming/fpush/blob/master/README-CH.md)
 
 ## 运行
 eclipse/IDEA里 <br/>
@@ -62,7 +62,7 @@ http://localhost:10200/app/push?receiverAlias=lsm001&title=系统提醒&desc=消
 Step4 Android演示 <br/>
 ![](doc/post.jpg)
 <br/>
-演示视频如下[demo.mp4](https://github.com/flylib/fpush/blob/master/doc/demo.mp4)
+演示视频如下[demo.mp4](https://github.com/liushaoming/fpush/blob/master/doc/demo.mp4)
 
 server效果图
 <br/>
@@ -94,7 +94,7 @@ http://localhost:10200/app/push?receiverAlias=lsm001&title=系统提醒&desc=消
 <br/>
 
 Android客户端演示可以直接使用apk文件装到自己的android手机上去<br/>
-[fpush-android-demo.apk](https://github.com/flylib/fpush/blob/master/fpush-android-demo/app/release/fpush-android-demo.apk)
+[fpush-android-demo.apk](https://github.com/liushaoming/fpush/blob/master/fpush-android-demo/app/release/fpush-android-demo.apk)
 <br/>
 里面的测试host就是我个人的服务器<code>host:appjishu.com</code>
 <br/>

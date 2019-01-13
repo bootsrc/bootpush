@@ -45,7 +45,7 @@ tcp通信图如下:
 ### 4.1协议定制
 HTTP协议和XMPP协议的字节数太多，带宽消耗大，不适合推送服务。我们的推送服务需要自己定制的二进制协议。
 下面是编写的protobuf配置文件
-[fmessage.proto](https://github.com/flylib/fpush/blob/master/fpush-core/src/main/java/fmessage.proto)
+[fmessage.proto](https://github.com/liushaoming/fpush/blob/master/fpush-core/src/main/java/fmessage.proto)
 
 进入本地的目录,例如<code>D:\git\flylib\fpush\fpush-core\src\main\java</code>执行
 ```shell
