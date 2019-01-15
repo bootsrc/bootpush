@@ -22,7 +22,7 @@ public class HeartBeatResponseHandler extends ChannelInboundHandlerAdapter {
             // 返回心跳应答消息
             if (message.getHeader() != null && message.getHeader().getType() == FMessageType.HEARTBEAT_REQ.value()) {
             	boolean passed = false;
-            	log.info("---Receive client heartbeat message : ---> " + message);
+//            	log.info("---Receive client heartbeat message : ---> " + message);
             	FHeader header = message.getHeader();
             	if (header != null && header.getAppId() > 0) {
             		passed = PassportUtil.checkByClientToken(header.getAppId(), header.getClientToken());
@@ -30,7 +30,7 @@ public class HeartBeatResponseHandler extends ChannelInboundHandlerAdapter {
             	if (passed) {
         			FMessage heartBeat = buildHeartBeat(header);
 
-        			log.info("---Send heartbeat response  message to client : ---> " + heartBeat);
+//        			log.info("---Send heartbeat response  message to client : ---> " + heartBeat);
                 	ctx.writeAndFlush(heartBeat);	
                 	ctx.fireChannelRead(msg);
                 	return ;

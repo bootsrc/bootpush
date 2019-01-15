@@ -27,7 +27,7 @@ public class HeartBeatRequestHandler extends ChannelInboundHandlerAdapter {
             if (message.getHeader() != null && message.getHeader().getType() == FMessageType.REGISTER_RESP.value()) {
                 heartBeat = ctx.executor().scheduleAtFixedRate(new HeartBeatRequestHandler.HeartBeatTask(ctx), 0, 5000, TimeUnit.MILLISECONDS);
             } else if (message.getHeader() != null && message.getHeader().getType() == FMessageType.HEARTBEAT_RESP.value()) {
-                System.out.println("Client receive server heartbeat message : ---> " + message);
+//                System.out.println("Client receive server heartbeat message : ---> " + message);
             } else {
                 ctx.fireChannelRead(msg);
             }
@@ -56,7 +56,7 @@ public class HeartBeatRequestHandler extends ChannelInboundHandlerAdapter {
         @Override
         public void run() {
             FMessage heartBeat = buildHeartBeat();
-            System.out.println("Client send heart beat message to server : ---> " + heartBeat);
+//            System.out.println("Client send heart beat message to server : ---> " + heartBeat);
             ctx.writeAndFlush(heartBeat);
         }
 
