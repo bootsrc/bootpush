@@ -284,5 +284,11 @@ public void doPush(List<MsgData> msgList, String alias) {
     }
 ```
 <br/>
+
+### 4.4 数据库设计
+
+开发环境的sql脚本是 [/doc/db/app_account-dev.sql](/doc/db/app_account-dev.sql)
+
+database为push
 <br/>
 
