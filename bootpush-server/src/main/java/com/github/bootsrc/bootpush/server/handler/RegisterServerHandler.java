@@ -13,8 +13,8 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RegisterResponseHandler extends ChannelInboundHandlerAdapter {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RegisterResponseHandler.class);
+public class RegisterServerHandler extends ChannelInboundHandlerAdapter {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegisterServerHandler.class);
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {

@@ -12,12 +12,15 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-public class HeartbeatRequestHandler extends ChannelInboundHandlerAdapter {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HeartbeatRequestHandler.class);
+/**
+ * 此ChannelInboundHandler工作在tcp client
+ */
+public class HeartbeatClientHandler extends ChannelInboundHandlerAdapter {
+    private static final Logger LOGGER = LoggerFactory.getLogger(HeartbeatClientHandler.class);
 
     private volatile ScheduledFuture<?> scheduledFuture;
 
-    public HeartbeatRequestHandler() {
+    public HeartbeatClientHandler() {
 
     }
 
@@ -27,7 +30,7 @@ public class HeartbeatRequestHandler extends ChannelInboundHandlerAdapter {
             StandardMessage message = (StandardMessage) msg;
             // 握手成功， 主动发送心跳信息
             if (message.getHeader() != null && message.getHeader().getType() == MessageType.REGISTER_RESP.value()) {
-                scheduledFuture = ctx.executor().scheduleAtFixedRate(new HeartbeatRequestHandler.HeartBeatTask(ctx), 0, 5000, TimeUnit.MILLISECONDS);
+                scheduledFuture = ctx.executor().scheduleAtFixedRate(new HeartbeatClientHandler.HeartBeatTask(ctx), 0, 5000, TimeUnit.MILLISECONDS);
             } else if (message.getHeader() != null && message.getHeader().getType() == MessageType.HEARTBEAT_RESP.value()) {
                 LOGGER.info("Client receive heartbeat response message from server : ---> " + message);
             } else {

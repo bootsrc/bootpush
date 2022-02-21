@@ -9,10 +9,13 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RegisterRequestHandler extends ChannelInboundHandlerAdapter {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RegisterRequestHandler.class);
+/**
+ * 此ChannelInboundHandler工作在tcp client
+ */
+public class RegisterClientHandler extends ChannelInboundHandlerAdapter {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegisterClientHandler.class);
 
-    public RegisterRequestHandler() {
+    public RegisterClientHandler() {
 
     }
 

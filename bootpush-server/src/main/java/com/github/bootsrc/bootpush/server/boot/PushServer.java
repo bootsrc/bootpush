@@ -3,7 +3,7 @@ package com.github.bootsrc.bootpush.server.boot;
 import com.github.bootsrc.bootpush.api.handler.DecoderHandler;
 import com.github.bootsrc.bootpush.api.handler.EncoderHandler;
 import com.github.bootsrc.bootpush.server.config.BootpushServerConfig;
-import com.github.bootsrc.bootpush.server.handler.RegisterResponseHandler;
+import com.github.bootsrc.bootpush.server.handler.RegisterServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -44,7 +44,7 @@ public class PushServer {
                 // in
                 pipeline.addLast(new ReadTimeoutHandler(60));
                 pipeline.addLast(decoderHandler);
-                pipeline.addLast(new RegisterResponseHandler());
+                pipeline.addLast(new RegisterServerHandler());
                 // TODO add PushHandler
 
             }
