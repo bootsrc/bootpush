@@ -1,9 +1,11 @@
-package com.github.bootsrc.bootpush.api.handler;
+package com.github.bootsrc.bootpush.client.handler;
 
 import com.github.bootsrc.bootpush.api.enums.MessageType;
 import com.github.bootsrc.bootpush.api.enums.RegisterState;
 import com.github.bootsrc.bootpush.api.model.StandardHeader;
 import com.github.bootsrc.bootpush.api.model.StandardMessage;
+import com.github.bootsrc.bootpush.client.config.AppContextUtil;
+import com.github.bootsrc.bootpush.client.config.PushClientConfig;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
@@ -19,23 +21,24 @@ public class RegisterClientHandler extends ChannelInboundHandlerAdapter {
 
     }
 
+
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        ctx.channel().writeAndFlush(buildRegisterRequest());
+        LOGGER.info("RegisterClientHandler#channelActive");
+        StandardMessage message = buildRegisterRequest();
+        ctx.channel().writeAndFlush(message);
+        LOGGER.info("==> WRITE msg to server, msg={}", message);
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if (msg instanceof StandardMessage) {
-            StandardMessage receivedMsg = (StandardMessage) msg;
-            StandardHeader receivedHeader = receivedMsg.getHeader();
+            StandardMessage message = (StandardMessage) msg;
+            StandardHeader receivedHeader = message.getHeader();
             if (receivedHeader != null && receivedHeader.getType() == MessageType.REGISTER_RESP.value()) {
-                if (RegisterState.SUCCESS.equals(receivedHeader.getResultCode())) {
-                    LOGGER.info("---client:register_SUCCESS---");
-                    String regId =receivedHeader.getRegistrationId();
-                    LOGGER.info("get receivedMsg={}, regId={}", null,regId);
+                if (RegisterState.SUCCESS.getCode().equals(receivedHeader.getResultCode())) {
+                    LOGGER.info("<== READ REGISTER_RESP message. msg={}", message);
                     ctx.fireChannelRead(msg);
-                    return;
                 } else {
                     LOGGER.info("---client:register_FAILED---DisconnectIt!!!--");
                     ctx.close();
@@ -49,8 +52,12 @@ public class RegisterClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     private StandardMessage buildRegisterRequest() {
+        // TODO regId是客户端登陆后从服务器端获取到的
+        String regId = AppContextUtil.getAppContext().getBean(PushClientConfig.class).getRegId();
         StandardMessage message = new StandardMessage();
         StandardHeader header = new StandardHeader();
+        // 用regId去push server注册，以建立长连接，方便后面进行tcp通信
+        header.setRegId(regId);
         header.setType(MessageType.REGISTER_REQ.value());
         header.setSessionId(null);
         header.setPriority(9);

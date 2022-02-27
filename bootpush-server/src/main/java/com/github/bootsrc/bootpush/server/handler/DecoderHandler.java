@@ -1,8 +1,9 @@
-package com.github.bootsrc.bootpush.api.handler;
+package com.github.bootsrc.bootpush.server.handler;
 
 import com.github.bootsrc.bootpush.api.model.StandardMessage;
 import com.github.bootsrc.bootpush.api.util.KryoUtil;
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 

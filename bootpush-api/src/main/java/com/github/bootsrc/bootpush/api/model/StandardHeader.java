@@ -17,9 +17,11 @@ public class StandardHeader implements Serializable {
      */
     private int priority;
     /**
-     * 客户端设备的注册id(每个设备的registrationId是唯一的)
+     * 客户端设备的注册id(每个设备的registrationId是唯一的), 简写为regId
+     * 并且这个regId是客户端通过用户名登陆后，后台返回给客户端的
+     * 同一个用户使用多个设备，使用不同的regId
      */
-    private String registrationId;
+    private String regId;
     /**
      * 客户端token(跟registrationId对应的客户端token)
      */
@@ -55,12 +57,12 @@ public class StandardHeader implements Serializable {
         this.priority = priority;
     }
 
-    public String getRegistrationId() {
-        return registrationId;
+    public String getRegId() {
+        return regId;
     }
 
-    public void setRegistrationId(String registrationId) {
-        this.registrationId = registrationId;
+    public void setRegId(String regId) {
+        this.regId = regId;
     }
 
     public String getClientToken() {

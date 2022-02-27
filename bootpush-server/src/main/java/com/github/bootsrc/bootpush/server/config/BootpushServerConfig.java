@@ -8,7 +8,7 @@ public class BootpushServerConfig {
     @Value("${bootpush.server.ioThreads:3}")
     private int ioThreads;
 
-    @Value("${bootpush.server.tcpPort:9101}")
+    @Value("${bootpush.server.tcpPort:9111}")
     private int tcpPort;
 
     public int getIoThreads() {

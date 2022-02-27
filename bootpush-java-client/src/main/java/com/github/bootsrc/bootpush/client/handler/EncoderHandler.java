@@ -1,8 +1,9 @@
-package com.github.bootsrc.bootpush.api.handler;
+package com.github.bootsrc.bootpush.client.handler;
 
 import com.github.bootsrc.bootpush.api.model.StandardMessage;
 import com.github.bootsrc.bootpush.api.util.KryoUtil;
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 import org.slf4j.Logger;
@@ -14,8 +15,6 @@ public class EncoderHandler extends MessageToByteEncoder<StandardMessage> {
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, StandardMessage standardMessage, ByteBuf byteBuf) throws Exception {
         byte[] bytes = KryoUtil.writeObjectToByteArray(standardMessage);
-        LOGGER.info("bytes.length={}", bytes.length);
-        LOGGER.info("bytes={}", bytes);
         byteBuf.writeInt(bytes.length);
         byteBuf.writeBytes(bytes);
     }

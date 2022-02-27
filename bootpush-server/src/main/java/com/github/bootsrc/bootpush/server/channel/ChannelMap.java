@@ -11,7 +11,7 @@ public class ChannelMap {
     private static final ConcurrentMap<String, Channel> map = new ConcurrentHashMap<String, Channel>();
 
     /**
-     * @param registrationId 是{@link StandardHeader#getRegistrationId()}
+     * @param registrationId 是{@link StandardHeader#getRegId()}
      * @param channel        channel
      */
     public static void put(String registrationId, Channel channel) {

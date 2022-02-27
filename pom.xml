@@ -19,6 +19,7 @@
     <modules>
         <module>bootpush-api</module>
         <module>bootpush-server</module>
+        <module>bootpush-java-client</module>
     </modules>
 
     <properties>

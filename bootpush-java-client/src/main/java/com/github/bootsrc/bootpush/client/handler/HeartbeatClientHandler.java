@@ -1,9 +1,12 @@
-package com.github.bootsrc.bootpush.api.handler;
+package com.github.bootsrc.bootpush.client.handler;
 
 import com.github.bootsrc.bootpush.api.enums.MessageType;
+import com.github.bootsrc.bootpush.api.enums.RegisterState;
 import com.github.bootsrc.bootpush.api.model.StandardHeader;
 import com.github.bootsrc.bootpush.api.model.StandardMessage;
 import com.github.bootsrc.bootpush.api.util.IdUtil;
+import com.github.bootsrc.bootpush.client.config.AppContextUtil;
+import com.github.bootsrc.bootpush.client.config.PushClientConfig;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
@@ -29,10 +32,12 @@ public class HeartbeatClientHandler extends ChannelInboundHandlerAdapter {
         if (msg instanceof StandardMessage) {
             StandardMessage message = (StandardMessage) msg;
             // 握手成功， 主动发送心跳信息
-            if (message.getHeader() != null && message.getHeader().getType() == MessageType.REGISTER_RESP.value()) {
-                scheduledFuture = ctx.executor().scheduleAtFixedRate(new HeartbeatClientHandler.HeartBeatTask(ctx), 0, 5000, TimeUnit.MILLISECONDS);
-            } else if (message.getHeader() != null && message.getHeader().getType() == MessageType.HEARTBEAT_RESP.value()) {
-                LOGGER.info("Client receive heartbeat response message from server : ---> " + message);
+            if (message.getHeader() != null && message.getHeader().getType() == MessageType.REGISTER_RESP.value()
+                    && RegisterState.SUCCESS.getCode().equals(message.getHeader().getResultCode())) {
+                String regId = message.getHeader().getRegId();
+                LOGGER.info("===Start to send HEARTBEAT to Server>>>");
+                scheduledFuture = ctx.executor().scheduleAtFixedRate(new HeartbeatTask(ctx)
+                        , 0, 5000, TimeUnit.MILLISECONDS);
             } else {
                 ctx.fireChannelRead(msg);
             }
@@ -48,27 +53,31 @@ public class HeartbeatClientHandler extends ChannelInboundHandlerAdapter {
             scheduledFuture.cancel(true);
             scheduledFuture = null;
         }
-        ctx.fireExceptionCaught(cause);
+//        ctx.fireExceptionCaught(cause);
+        LOGGER.error(cause.getMessage(), cause);
     }
 
-    private static class HeartBeatTask implements Runnable {
+    private static class HeartbeatTask implements Runnable {
         private final ChannelHandlerContext ctx;
 
-        public HeartBeatTask(ChannelHandlerContext ctx) {
+        public HeartbeatTask(ChannelHandlerContext ctx) {
             this.ctx = ctx;
         }
 
         @Override
         public void run() {
-            StandardMessage heartBeat = buildHeartbeat();
-            ctx.writeAndFlush(heartBeat);
+            StandardMessage heartbeat = buildHeartbeat();
+            ctx.channel().writeAndFlush(heartbeat);
         }
 
         private StandardMessage buildHeartbeat() {
+            String regId = AppContextUtil.getAppContext().getBean(PushClientConfig.class).getRegId();
+
             StandardMessage message = new StandardMessage();
             StandardHeader header = new StandardHeader();
+            header.setRegId(regId);
             header.setType(MessageType.HEARTBEAT_REQ.value());
-            header.setSessionId(IdUtil.newUUID());
+            header.setSessionId(null);
             header.setPriority(1);
             header.setAppId(null);
             header.setClientToken(null);

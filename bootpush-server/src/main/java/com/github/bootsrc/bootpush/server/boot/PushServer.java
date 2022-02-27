@@ -1,8 +1,9 @@
 package com.github.bootsrc.bootpush.server.boot;
 
-import com.github.bootsrc.bootpush.api.handler.DecoderHandler;
-import com.github.bootsrc.bootpush.api.handler.EncoderHandler;
+import com.github.bootsrc.bootpush.server.handler.DecoderHandler;
+import com.github.bootsrc.bootpush.server.handler.EncoderHandler;
 import com.github.bootsrc.bootpush.server.config.BootpushServerConfig;
+import com.github.bootsrc.bootpush.server.handler.HeartbeatServerHandler;
 import com.github.bootsrc.bootpush.server.handler.RegisterServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
@@ -28,22 +29,22 @@ public class PushServer {
     }
 
     public void start() {
+        LOGGER.info("bootpush-server is starting...");
+
         bootstrap = new ServerBootstrap();
         group = new NioEventLoopGroup(config.getIoThreads());
         bootstrap.group(group);
-
-        EncoderHandler encoderHandler = new EncoderHandler();
-        DecoderHandler decoderHandler = new DecoderHandler();
         bootstrap.channel(NioServerSocketChannel.class).childHandler(new ChannelInitializer<SocketChannel>() {
             @Override
             protected void initChannel(SocketChannel socketChannel) throws Exception {
                 ChannelPipeline pipeline = socketChannel.pipeline();
                 // out
-                pipeline.addLast(encoderHandler);
+                pipeline.addLast(new EncoderHandler());
 
                 // in
-                pipeline.addLast(new ReadTimeoutHandler(60));
-                pipeline.addLast(decoderHandler);
+                pipeline.addLast(new ReadTimeoutHandler(40));
+                pipeline.addLast(new DecoderHandler());
+                pipeline.addLast(new HeartbeatServerHandler());
                 pipeline.addLast(new RegisterServerHandler());
                 // TODO add PushHandler
 
