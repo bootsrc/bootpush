@@ -19,7 +19,7 @@ public class PushUtil {
         StandardHeader header = new StandardHeader();
         StandardBody body = new StandardBody();
         header.setRegId(regId);
-        header.setType(MessageType.PUSH.value());
+        header.setType(MessageType.PUSH.getValue());
         msg.setHeader(header);
 
         body.setContentType("text");

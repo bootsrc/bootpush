@@ -9,6 +9,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.timeout.ReadTimeoutHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +30,7 @@ public class Client {
                         // out
                         .addLast(new EncoderHandler())
                         // in
+                        .addLast(new ReadTimeoutHandler(40))
                         .addLast(new DecoderHandler())
                         .addLast(new RegisterClientHandler())
                         .addLast(new HeartbeatClientHandler())

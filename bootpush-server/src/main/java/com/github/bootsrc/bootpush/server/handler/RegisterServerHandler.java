@@ -30,7 +30,7 @@ public class RegisterServerHandler extends ChannelInboundHandlerAdapter {
         if (msg instanceof StandardMessage) {
             StandardMessage message = (StandardMessage) msg;
             StandardHeader header = message.getHeader();
-            if (header != null && header.getType() == MessageType.REGISTER_REQ.value()) {
+            if (header != null && header.getType() == MessageType.REGISTER_REQUEST.getValue()) {
                 StandardMessage targetMessage = buildRegisterResponse(header, ctx);
                 ctx.writeAndFlush(targetMessage);
                 LOGGER.info("==> WRITE msg to client, msg={}", GsonSingleton.getGson().toJson(targetMessage));
@@ -50,7 +50,7 @@ public class RegisterServerHandler extends ChannelInboundHandlerAdapter {
 
     private StandardMessage buildRegisterResponse(StandardHeader header, ChannelHandlerContext ctx) {
         StandardMessage message = new StandardMessage();
-        header.setType(MessageType.REGISTER_RESP.value());
+        header.setType(MessageType.REGISTER_RESPONSE.getValue());
         // TODO checkByClientToken
         // boolean passed = PassportUtil.checkByClientToken(header.getAppId(), header.getClientToken());
         boolean passed = true;

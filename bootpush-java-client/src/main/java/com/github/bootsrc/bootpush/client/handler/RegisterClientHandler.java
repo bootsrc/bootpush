@@ -35,7 +35,7 @@ public class RegisterClientHandler extends ChannelInboundHandlerAdapter {
         if (msg instanceof StandardMessage) {
             StandardMessage message = (StandardMessage) msg;
             StandardHeader receivedHeader = message.getHeader();
-            if (receivedHeader != null && receivedHeader.getType() == MessageType.REGISTER_RESP.value()) {
+            if (receivedHeader != null && receivedHeader.getType() == MessageType.REGISTER_RESPONSE.getValue()) {
                 if (RegisterState.SUCCESS.getCode().equals(receivedHeader.getResultCode())) {
                     LOGGER.info("<== READ REGISTER_RESP message. msg={}", message);
                     ctx.fireChannelRead(msg);
@@ -58,7 +58,7 @@ public class RegisterClientHandler extends ChannelInboundHandlerAdapter {
         StandardHeader header = new StandardHeader();
         // 用regId去push server注册，以建立长连接，方便后面进行tcp通信
         header.setRegId(regId);
-        header.setType(MessageType.REGISTER_REQ.value());
+        header.setType(MessageType.REGISTER_REQUEST.getValue());
         header.setSessionId(null);
         header.setPriority(9);
         header.setAppId(null);

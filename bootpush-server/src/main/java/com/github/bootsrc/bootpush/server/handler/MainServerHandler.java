@@ -17,7 +17,7 @@ public class MainServerHandler extends ChannelInboundHandlerAdapter {
             StandardMessage message = (StandardMessage) msg;
             StandardHeader header = message.getHeader();
             if (header != null
-                    && header.getType() == MessageType.REGISTER_REQ.value()) {
+                    && header.getType() == MessageType.REGISTER_REQUEST.getValue()) {
                 // TODO 针对各种message type的分别处理
 
             } else {

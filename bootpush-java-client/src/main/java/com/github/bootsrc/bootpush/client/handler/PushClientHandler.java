@@ -15,7 +15,7 @@ public class PushClientHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if (msg instanceof StandardMessage) {
             StandardMessage message = (StandardMessage) msg;
-            if (null != message.getHeader() && MessageType.PUSH.value() == message.getHeader().getType()) {
+            if (null != message.getHeader() && MessageType.PUSH.getValue() == message.getHeader().getType()) {
                 LOGGER.info("<== RECEIVED PUSHED MESSAGE from Server, msg data={}"
                         , GsonSingleton.getGson().toJson(message));
             }

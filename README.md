@@ -13,4 +13,17 @@ Intelij IDEA导入项目后
 
 测试从server推送消息到client
 浏览器访问
+## Demo1,推送消息到java-cient
 http://localhost:9101/api/push?regId=reg-id-001&msg=This-is-pushed-msg
+
+## Demo2,推送消息到android-cient
+安装doc/bootpush.apk到自己的android手机上
+Host填写自己电脑的ip就行（bootpush-server的ip, 确保电脑和手机连接的是同一个WIFI）
+类似于下图
+![alt 图1](/doc/android-client-2.jpeg)
+
+在电脑浏览器上访问如下url
+http://localhost:9101/api/push?regId=reg-id-android-001&msg=This-is-pushed-msg
+
+查看Android手机上是否弹出推送的消息。
+![alt 图2](/doc/android-client-2.jpeg)
